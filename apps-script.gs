@@ -67,3 +67,78 @@ function doGet() {
     })).setMimeType(ContentService.MimeType.JSON);
   }
 }
+
+
+/**
+ * Arma la pestaña "Resumen": lo que Juani y Mica necesitan ver de un vistazo,
+ * sin leer 275 filas y sin depender de que alguien corra un script.
+ *
+ * Son FORMULAS, no valores: se actualizan solas cada vez que llega una
+ * confirmacion nueva. Correr esta funcion UNA VEZ desde el editor de Apps
+ * Script (elegirla en el desplegable de arriba y darle Ejecutar).
+ *
+ * Lo que NO esta aca, y sigue siendo manual: el cruce contra la lista del
+ * planner (quien falta contestar, quien confirmo distinto de lo reservado).
+ * Esa lista vive en otro archivo, de otra cuenta, y la edita Yani.
+ */
+function armarResumen() {
+  const libro = SpreadsheetApp.getActiveSpreadsheet();
+  let h = libro.getSheetByName('Resumen');
+  if (h) libro.deleteSheet(h);          // se rehace limpio cada vez
+  h = libro.insertSheet('Resumen', 0);  // primera pestaña: es lo que se mira
+
+  const R = "'" + HOJA + "'";           // referencia a la hoja de respuestas
+  const filas = [
+    ['CONFIRMACIONES', ''],
+    ['Mica & Juani · 28 de noviembre de 2026', ''],
+    ['', ''],
+    ['CUBIERTOS CONFIRMADOS', `=SUMIF(${R}!D2:D,"Sí",${R}!E2:E)`],
+    ['', ''],
+    ['Respuestas recibidas', `=COUNTA(${R}!B2:B)`],
+    ['Confirmaron que vienen', `=COUNTIF(${R}!D2:D,"Sí")`],
+    ['Dijeron que no', `=COUNTIF(${R}!D2:D,"No")`],
+    ['Última respuesta', `=IFERROR(INDEX(${R}!A2:A,COUNTA(${R}!A2:A)),"todavía ninguna")`],
+    ['', ''],
+    ['REVISAR', ''],
+    ['Nombres repetidos',
+     `=IFERROR(IF(COUNTA(${R}!B2:B)=0,"—",TEXTJOIN(", ",TRUE,` +
+     `FILTER(UNIQUE(${R}!B2:B),COUNTIF(${R}!B2:B,UNIQUE(${R}!B2:B))>1))),"ninguno")`],
+    ['', 'Si aparece alguien acá, mandó el formulario dos veces y sus cubiertos se están contando doble.'],
+    ['', ''],
+    ['ALERGIAS SEVERAS', `=COUNTIF(${R}!H2:H,"Sí*")`],
+    ['',
+     `=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER(${R}!B2:B&" — "&${R}!G2:G,LEFT(${R}!H2:H,2)="Sí")),"ninguna")`],
+    ['', 'Estas van SEPARADAS al salón. No son preferencias: son riesgo médico.'],
+    ['', ''],
+    ['OTRAS RESTRICCIONES', ''],
+    ['',
+     `=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER(${R}!B2:B&" — "&${R}!F2:F,` +
+     `${R}!F2:F<>"",${R}!F2:F<>"Como de todo")),"ninguna")`],
+    ['', ''],
+    ['DE LOS ACOMPAÑANTES', ''],
+    ['',
+     `=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER("con "&${R}!B2:B&": "&${R}!I2:I,${R}!I2:I<>"")),"ninguna")`],
+    ['', ''],
+    ['VIENEN CON CHICOS', ''],
+    ['',
+     `=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER(${R}!B2:B&" — "&${R}!K2:K,${R}!K2:K<>"")),"ninguno")`],
+  ];
+
+  h.getRange(1, 1, filas.length, 2).setValues(filas);
+
+  // formato: que se lea de un vistazo, no que parezca una planilla contable
+  h.setColumnWidth(1, 230);
+  h.setColumnWidth(2, 560);
+  h.getRange('A1').setFontSize(16).setFontWeight('bold');
+  h.getRange('A2').setFontStyle('italic').setFontColor('#666666');
+  h.getRange('A4:B4').setFontWeight('bold').setFontSize(14).setBackground('#F0E9DB');
+  ['A11', 'A15', 'A19', 'A22', 'A25'].forEach(c =>
+    h.getRange(c).setFontWeight('bold').setFontColor('#571E21'));
+  h.getRange('A15:B15').setBackground('#F8E0E0');
+  h.getRange('B13').setFontSize(9).setFontStyle('italic').setFontColor('#888888');
+  h.getRange('B17').setFontSize(9).setFontStyle('italic').setFontColor('#888888');
+  h.getRange('B1:B30').setWrap(true).setVerticalAlignment('top');
+  h.setFrozenRows(2);
+
+  SpreadsheetApp.getUi().alert('Listo. La pestaña "Resumen" se actualiza sola con cada confirmación nueva.');
+}

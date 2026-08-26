@@ -1,0 +1,62 @@
+name: Latido del RSVP
+
+# Repo separado del monitor de turnos a proposito: aquel mide algo
+# irreversible y no puede caerse por un cambio de este proyecto.
+
+on:
+  schedule:
+    - cron: "0 * * * *"     # cada hora en punto (UTC)
+  workflow_dispatch:
+    inputs:
+      simulacro:
+        description: "Probar la ALARMA (manda la notificacion, no rompe nada)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: latido-rsvp
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  vigilar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Verificar que el formulario sigue guardando
+        env:
+          RSVP_ENDPOINT: ${{ secrets.RSVP_ENDPOINT }}
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          RSVP_SIMULACRO: ${{ inputs.simulacro && '1' || '' }}
+        run: python latido.py || true
+
+      - name: Guardar el estado
+        run: |
+          set -e
+          git config user.name  "latido-rsvp"
+          git config user.email "actions@github.com"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "sin cambios que guardar"
+            exit 0
+          fi
+          git commit -m "latido: $(date -u '+%Y-%m-%d %H:%M UTC')"
+          for i in 1 2 3; do
+            if git push; then
+              echo "estado guardado"
+              exit 0
+            fi
+            git pull --rebase --autostash
+            sleep 5
+          done
+          echo "no se pudo guardar el estado"
+          exit 1

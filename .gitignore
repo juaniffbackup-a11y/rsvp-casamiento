@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.DS_Store
+
+# OJO: estado.json y latido.jsonl NO se ignoran. Son el estado del latido:
+# sin versionarlos, cada corrida arranca de cero, el contador de fallos
+# nunca llega a 2 y la alarma no salta nunca.

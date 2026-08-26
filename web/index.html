@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mica &amp; Juani · 28.11.26</title>
+<meta name="description" content="Nos casamos el 28 de noviembre de 2026 en La Posada Multiespacios. Confirmá tu asistencia.">
+<meta property="og:title" content="Mica & Juani · 28.11.26">
+<meta property="og:description" content="Nos casamos. Confirmá tu asistencia.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="es_AR">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23571E21'/%3E%3Ctext x='50' y='72' font-size='64' text-anchor='middle' fill='%23E4D8C2' font-family='Georgia,serif'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Italianno&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   PALETA — tomada del arte de Andina Design Studio (MJ_Varios rev04)
+   ============================================================ */
+:root{
+  --vino:#571E21;
+  --vino-claro:#6D2C35;
+  --bosque:#3C4A36;
+  --salvia:#768462;
+  --crema:#E4D8C2;
+  --crema-suave:#F0E9DB;
+  --papel:#F7F4EE;
+  --papel-alto:#FFFFFF;
+  --tinta:#2A2622;
+  --hairline:rgba(87,30,33,.28);
+
+  --display:'Italianno',cursive;
+  --texto:'Cormorant Garamond',Georgia,serif;
+
+  --ancho:1140px;
+  --gutter:clamp(1.25rem,5vw,3.5rem);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--papel);
+  color:var(--tinta);
+  font-family:var(--texto);
+  font-size:clamp(1.02rem,.55vw + .92rem,1.16rem);
+  line-height:1.72;
+  font-weight:400;
+  overflow-x:hidden;
+}
+/* textura de papel de acuarela, como el impreso */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.5;
+  mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='.14'/%3E%3C/svg%3E");
+}
+main,header,footer{position:relative;z-index:2}
+img,svg{max-width:100%;display:block}
+
+.wrap{width:min(100% - var(--gutter)*2,var(--ancho));margin-inline:auto}
+section{padding-block:clamp(4.5rem,10vw,8.5rem)}
+
+.eyebrow{
+  font-size:.68rem;letter-spacing:.42em;text-transform:uppercase;
+  font-weight:500;margin:0 0 1.5rem;
+}
+.script{font-family:var(--display);font-weight:400;line-height:.9;letter-spacing:.01em}
+.serif-sm{font-size:.72rem;letter-spacing:.34em;text-transform:uppercase}
+
+a{color:inherit}
+:focus-visible{outline:2px solid var(--vino);outline-offset:3px;border-radius:2px}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero{
+  min-height:100svh;background:var(--vino);color:var(--crema);
+  display:grid;place-items:center;text-align:center;
+  padding:clamp(3rem,8vw,6rem) var(--gutter);position:relative;overflow:hidden;
+}
+.hero::after{ /* halo cálido, como la tinta sobre papel */
+  content:"";position:absolute;inset:0;
+  background:radial-gradient(120% 90% at 50% 40%,rgba(255,255,255,.07),transparent 60%);
+  pointer-events:none;
+}
+.hero__inner{position:relative;z-index:2}
+.hero__fecha{
+  font-size:clamp(.7rem,1.4vw,.82rem);letter-spacing:.6em;text-transform:uppercase;
+  margin:0 0 clamp(1rem,3vw,2rem);opacity:.85;padding-left:.6em;
+}
+.hero__nombres{
+  font-family:var(--display);font-size:clamp(4.2rem,13vw,10.5rem);
+  line-height:.78;margin:0;color:var(--crema);
+}
+.hero__nombres .amp{font-size:.62em;display:inline-block;transform:translateY(-.12em);padding-inline:.06em}
+.hero__linea{
+  width:clamp(60px,10vw,110px);height:1px;background:var(--crema);
+  opacity:.5;margin:clamp(1.4rem,3vw,2rem) auto;
+}
+.hero__claim{font-size:1rem;letter-spacing:.05em;margin:0 auto 2.6rem;opacity:.9;font-weight:300;max-width:36ch}
+.hero__cta{
+  display:inline-block;text-decoration:none;border:1px solid rgba(228,216,194,.55);
+  padding:.95em 2.6em;font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;
+  transition:background .35s ease,color .35s ease,border-color .35s ease;
+}
+.hero__cta:hover{background:var(--crema);color:var(--vino);border-color:var(--crema)}
+.hero__scroll{
+  position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);
+  font-size:.6rem;letter-spacing:.34em;text-transform:uppercase;opacity:.6;z-index:2;
+}
+.hero__scroll span{display:block;width:1px;height:34px;background:currentColor;margin:.8rem auto 0;transform-origin:top;animation:drop 2.6s ease-in-out infinite}
+@keyframes drop{0%,100%{transform:scaleY(.3);opacity:.3}50%{transform:scaleY(1);opacity:.9}}
+
+/* entrada */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity 1s ease,transform 1s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+.d1{transition-delay:.12s}.d2{transition-delay:.26s}.d3{transition-delay:.4s}.d4{transition-delay:.54s}
+
+/* ============================================================
+   MONOGRAMA + FRASE
+   ============================================================ */
+.frase{text-align:center}
+.frase__mono{width:min(230px,52vw);margin:0 auto clamp(2rem,5vw,3rem)}
+.frase__mono path,.frase__mono line{
+  fill:none;stroke:var(--vino);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;
+}
+.frase__mono text{fill:var(--vino);stroke:none}
+.draw{stroke-dasharray:var(--len,900);stroke-dashoffset:var(--len,900)}
+.frase__mono.in .draw{animation:draw 2.4s cubic-bezier(.3,.7,.3,1) forwards}
+.frase__mono .ink{opacity:0}
+.frase__mono.in .ink{animation:fade 1.1s ease 1.5s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fade{to{opacity:1}}
+.frase__texto{
+  font-family:var(--display);font-size:clamp(2.6rem,7vw,4.6rem);
+  line-height:1;color:var(--vino);margin:0;
+}
+.frase__texto em{display:block;font-style:normal;color:var(--salvia)}
+
+/* ============================================================
+   DATOS DEL EVENTO
+   ============================================================ */
+.datos{background:var(--vino);color:var(--crema)}
+.datos__grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:clamp(2.5rem,6vw,4rem);text-align:center;
+}
+.dato h3{
+  font-family:var(--texto);font-weight:500;font-size:.68rem;letter-spacing:.36em;
+  text-transform:uppercase;margin:0 0 1.1rem;opacity:.7;
+}
+.dato p{margin:0;font-size:1.12rem;font-weight:300;line-height:1.6}
+.dato strong{display:block;font-family:var(--display);font-size:2.6rem;font-weight:400;line-height:1;margin-bottom:.35rem}
+.datos__cta{text-align:center;margin-top:clamp(3rem,7vw,4.5rem)}
+.link-fino{
+  display:inline-block;text-decoration:none;border-bottom:1px solid rgba(228,216,194,.5);
+  padding-bottom:.4em;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;
+  transition:border-color .3s,opacity .3s;
+}
+.link-fino:hover{border-color:var(--crema);opacity:.75}
+
+/* cuenta regresiva */
+.cuenta{display:flex;justify-content:center;gap:clamp(1.6rem,5vw,3.4rem);margin-top:clamp(3rem,7vw,4.2rem)}
+.cuenta div{text-align:center}
+.cuenta b{display:block;font-family:var(--display);font-size:clamp(3rem,8vw,4.4rem);font-weight:400;line-height:1}
+.cuenta span{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;opacity:.65}
+
+/* ============================================================
+   RSVP
+   ============================================================ */
+.rsvp{background:var(--bosque);color:var(--crema-suave)}
+.rsvp__card{
+  background:var(--papel-alto);color:var(--tinta);
+  border-radius:clamp(120px,26vw,260px) clamp(120px,26vw,260px) 8px 8px;
+  padding:clamp(3.5rem,9vw,6rem) clamp(1.6rem,6vw,5rem) clamp(2.8rem,6vw,4rem);
+  max-width:760px;margin-inline:auto;box-shadow:0 30px 70px rgba(0,0,0,.22);
+  border:1px solid rgba(87,30,33,.18);
+}
+.rsvp__head{text-align:center;margin-bottom:clamp(2.5rem,6vw,3.5rem)}
+.rsvp__head h2{font-family:var(--display);font-size:clamp(3.2rem,9vw,5rem);color:var(--vino);margin:0 0 .8rem;font-weight:400;line-height:1}
+.rsvp__head p{margin:0;font-weight:300;font-size:1rem;color:rgba(42,38,34,.75)}
+
+.campo{margin-bottom:2.1rem}
+.campo > label,.grupo__titulo{
+  display:block;font-size:.63rem;letter-spacing:.28em;text-transform:uppercase;
+  font-weight:600;margin-bottom:.75rem;color:var(--vino);
+}
+.campo input[type=text],.campo input[type=email],.campo input[type=tel],.campo input[type=number],.campo textarea{
+  width:100%;border:0;border-bottom:1px solid var(--hairline);background:transparent;
+  font-family:var(--texto);font-size:1.08rem;font-weight:300;color:var(--tinta);
+  padding:.55rem .2rem;transition:border-color .3s;
+}
+.campo textarea{resize:vertical;min-height:88px;line-height:1.6}
+.campo input:focus,.campo textarea:focus{outline:0;border-bottom-color:var(--vino);border-bottom-width:2px}
+.campo input::placeholder,.campo textarea::placeholder{color:rgba(42,38,34,.32);font-style:italic}
+.ayuda{font-size:.85rem;font-style:italic;font-weight:300;color:rgba(42,38,34,.55);margin:.55rem 0 0}
+
+/* opciones tipo pastilla */
+.opciones{display:flex;flex-wrap:wrap;gap:.6rem}
+.opciones input{position:absolute;opacity:0;width:0;height:0}
+.opciones label{
+  cursor:pointer;border:1px solid var(--hairline);border-radius:999px;
+  padding:.62em 1.5em;font-size:.82rem;letter-spacing:.06em;
+  transition:background .25s,color .25s,border-color .25s;user-select:none;
+}
+.opciones label:hover{border-color:var(--vino)}
+.opciones input:checked + label{background:var(--vino);color:var(--crema);border-color:var(--vino)}
+.opciones input:focus-visible + label{outline:2px solid var(--vino);outline-offset:3px}
+.opciones--si-no label{min-width:140px;text-align:center;font-size:.88rem;padding:.8em 1.6em}
+
+.oculto{display:none}
+.enviar{
+  width:100%;margin-top:1rem;background:var(--vino);color:var(--crema);border:0;
+  font-family:var(--texto);font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;
+  padding:1.35em 2em;cursor:pointer;transition:background .3s;
+}
+.enviar:hover{background:var(--vino-claro)}
+.enviar:disabled{opacity:.5;cursor:progress}
+.error{color:var(--vino);font-size:.9rem;font-style:italic;margin-top:1rem;text-align:center;min-height:1.4em}
+
+.gracias{text-align:center;padding-block:1rem}
+.gracias h3{font-family:var(--display);font-size:clamp(3rem,8vw,4.4rem);color:var(--vino);margin:0 0 1rem;font-weight:400;line-height:1}
+.gracias p{margin:0 auto;max-width:34ch;font-weight:300}
+.gracias .mono-mini{width:110px;margin:2.2rem auto 0;opacity:.75}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer{background:var(--vino);color:var(--crema);text-align:center;padding:clamp(3.5rem,8vw,5rem) var(--gutter)}
+footer .mono-mini{width:120px;margin:0 auto 1.8rem;opacity:.85}
+footer .mono-mini path{stroke:var(--crema)}
+footer .mono-mini text{fill:var(--crema)}
+footer p{margin:0;font-size:.66rem;letter-spacing:.36em;text-transform:uppercase;opacity:.8}
+footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.5;font-size:.6rem}
+
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition-duration:.01ms!important}
+  .reveal{opacity:1;transform:none}
+  .draw{stroke-dashoffset:0}
+  .frase__mono .ink{opacity:1}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════ HERO ══════════════ -->
+<header class="hero">
+  <div class="hero__inner">
+    <p class="hero__fecha reveal">28 · 11 · 2026</p>
+    <h1 class="hero__nombres reveal d1">Mica <span class="amp">&amp;</span> Juani</h1>
+    <div class="hero__linea reveal d2"></div>
+    <p class="hero__claim reveal d2">Nos casamos, y queremos que estés.</p>
+    <a class="hero__cta reveal d3" href="#confirmar">Confirmá tu asistencia</a>
+  </div>
+  <div class="hero__scroll" aria-hidden="true">Seguí<span></span></div>
+</header>
+
+<main>
+
+<!-- ══════════════ MONOGRAMA + FRASE ══════════════ -->
+<section class="frase">
+  <div class="wrap">
+    <svg class="frase__mono" viewBox="0 0 300 200" role="img" aria-label="Monograma de Mica y Juani, dos corazones entrelazados">
+      <!-- corazón izquierdo -->
+      <path class="draw" style="--len:520"
+        d="M78 172 C40 146 22 122 22 100 C22 82 34 70 50 70 C63 70 73 78 78 88 C83 78 93 70 106 70 C122 70 134 82 134 100 C134 122 116 146 78 172 Z"/>
+      <!-- corazón derecho -->
+      <path class="draw" style="--len:520"
+        d="M222 172 C184 146 166 122 166 100 C166 82 178 70 194 70 C207 70 217 78 222 88 C227 78 237 70 250 70 C266 70 278 82 278 100 C278 122 260 146 222 172 Z"/>
+      <!-- nudo central + lazo -->
+      <path class="draw" style="--len:120" d="M134 108 C144 104 156 104 166 108"/>
+      <path class="draw" style="--len:190" d="M150 100 C150 84 138 78 142 68 C146 58 158 60 158 70 C158 80 148 86 150 100 Z"/>
+      <!-- colas -->
+      <path class="draw" style="--len:90" d="M22 104 C14 108 8 114 6 122"/>
+      <path class="draw" style="--len:90" d="M278 104 C286 108 292 114 294 122"/>
+      <!-- iniciales y fecha -->
+      <text class="ink" x="78" y="128" text-anchor="middle" font-family="Italianno, cursive" font-size="62">M</text>
+      <text class="ink" x="222" y="128" text-anchor="middle" font-family="Italianno, cursive" font-size="62">J</text>
+      <text class="ink" x="150" y="192" text-anchor="middle" font-family="Italianno, cursive" font-size="44">28/11</text>
+    </svg>
+    <h2 class="frase__texto reveal">Que el tiempo nos encuentre <em>siempre juntos</em></h2>
+  </div>
+</section>
+
+<!-- ══════════════ DATOS ══════════════ -->
+<section class="datos" id="datos">
+  <div class="wrap">
+    <div class="datos__grid">
+      <div class="dato reveal">
+        <h3>Cuándo</h3>
+        <p><strong>Sábado 28</strong>de noviembre de 2026<br>19:00 hs</p>
+      </div>
+      <div class="dato reveal d1">
+        <h3>Dónde</h3>
+        <p><strong>La Posada</strong>Multiespacios<br>J. M. Loreto 4551, Benavídez</p>
+      </div>
+      <!-- ✎ EDITAR: cambiá el dress code si va otra cosa -->
+      <div class="dato reveal d2">
+        <h3>Cómo</h3>
+        <p><strong>Elegante</strong>Ceremonia y fiesta<br>en el mismo lugar</p>
+      </div>
+    </div>
+
+    <div class="cuenta reveal d3" id="cuenta" aria-label="Cuenta regresiva">
+      <div><b id="c-dias">—</b><span>días</span></div>
+      <div><b id="c-horas">—</b><span>horas</span></div>
+      <div><b id="c-min">—</b><span>minutos</span></div>
+    </div>
+
+    <div class="datos__cta reveal d3">
+      <a class="link-fino" href="https://www.google.com/maps/search/?api=1&query=La+Posada+Multiespacios+J.+M.+Loreto+4551+Benavidez" target="_blank" rel="noopener">Cómo llegar</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ RSVP ══════════════ -->
+<section class="rsvp" id="confirmar">
+  <div class="wrap">
+    <div class="rsvp__card">
+      <div class="rsvp__head">
+        <h2>Confirmá tu lugar</h2>
+        <p>Contanos si venís así organizamos todo. Te lleva un minuto.</p>
+      </div>
+
+      <form id="form" novalidate>
+        <div class="campo">
+          <label for="nombre">Nombre y apellido</label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder="Como te conocemos" required>
+        </div>
+
+        <div class="campo">
+          <label for="contacto">WhatsApp o mail</label>
+          <input type="text" id="contacto" name="contacto" placeholder="Para avisarte cualquier cambio" required>
+        </div>
+
+        <div class="campo">
+          <span class="grupo__titulo" id="lbl-asiste">¿Venís?</span>
+          <div class="opciones opciones--si-no" role="radiogroup" aria-labelledby="lbl-asiste">
+            <input type="radio" id="a-si" name="asiste" value="Sí" required>
+            <label for="a-si">Ahí estaré</label>
+            <input type="radio" id="a-no" name="asiste" value="No">
+            <label for="a-no">No voy a poder</label>
+          </div>
+        </div>
+
+        <div id="bloque-si" class="oculto">
+          <div class="campo">
+            <label for="cuantos">¿Cuántos van en total, contándote?</label>
+            <input type="number" id="cuantos" name="cuantos" min="1" max="12" step="1"
+                   inputmode="numeric" placeholder="1">
+            <p class="ayuda">Si estás invitado con alguien más, contalo acá. Si venís solo, poné 1.</p>
+          </div>
+
+          <div class="campo">
+            <span class="grupo__titulo" id="lbl-dieta">¿Comés de todo?</span>
+            <div class="opciones" role="group" aria-labelledby="lbl-dieta">
+              <input type="checkbox" id="d0" name="dieta" value="Como de todo"><label for="d0">Como de todo</label>
+              <input type="checkbox" id="d1" name="dieta" value="Vegetariano/a"><label for="d1">Vegetariano/a</label>
+              <input type="checkbox" id="d2" name="dieta" value="Vegano/a"><label for="d2">Vegano/a</label>
+              <input type="checkbox" id="d3" name="dieta" value="Sin TACC (celíaco/a)"><label for="d3">Sin TACC</label>
+              <input type="checkbox" id="d4" name="dieta" value="Sin lactosa"><label for="d4">Sin lactosa</label>
+              <input type="checkbox" id="d5" name="dieta" value="Sin carne roja"><label for="d5">Sin carne roja</label>
+              <input type="checkbox" id="d6" name="dieta" value="Sin cerdo"><label for="d6">Sin cerdo</label>
+              <input type="checkbox" id="d7" name="dieta" value="Sin pescado ni mariscos"><label for="d7">Sin pescado ni mariscos</label>
+              <input type="checkbox" id="d8" name="dieta" value="Alergia"><label for="d8">Tengo una alergia</label>
+              <input type="checkbox" id="d9" name="dieta" value="Otra"><label for="d9">Otra</label>
+            </div>
+          </div>
+
+          <div class="campo oculto" id="campo-detalle">
+            <label for="detalle">Contanos exactamente qué no podés comer</label>
+            <input type="text" id="detalle" name="detalle" placeholder="Frutos secos, mariscos, huevo…">
+            <p class="ayuda">Cuanto más preciso, mejor lo resuelve la cocina.</p>
+          </div>
+
+          <div class="campo oculto" id="campo-severa">
+            <span class="grupo__titulo" id="lbl-severa">¿Es una alergia severa?</span>
+            <div class="opciones" role="radiogroup" aria-labelledby="lbl-severa">
+              <input type="radio" id="s-si" name="severa" value="Sí, ni trazas ni contacto"><label for="s-si">Sí, ni trazas ni contacto</label>
+              <input type="radio" id="s-no" name="severa" value="No, es intolerancia o preferencia"><label for="s-no">No, es intolerancia</label>
+            </div>
+            <p class="ayuda">Si es severa avisamos a cocina para que tu plato se prepare aparte.</p>
+          </div>
+
+          <div class="campo oculto" id="campo-acomp-dieta">
+            <label for="dieta-acomp">¿Y los que vienen con vos?</label>
+            <textarea id="dieta-acomp" name="dietaAcomp" placeholder="Ej: Sofía es vegetariana; Tomás no come gluten"></textarea>
+            <p class="ayuda">Poné el nombre de cada uno con su restricción, así no las mezclamos.</p>
+          </div>
+
+          <div class="campo">
+            <span class="grupo__titulo" id="lbl-menores">¿Venís con chicos?</span>
+            <div class="opciones" role="radiogroup" aria-labelledby="lbl-menores">
+              <input type="radio" id="m-no" name="menores" value="No"><label for="m-no">No</label>
+              <input type="radio" id="m-si" name="menores" value="Sí"><label for="m-si">Sí</label>
+            </div>
+          </div>
+
+          <div class="campo oculto" id="campo-menores">
+            <label for="menores-detalle">¿Cuántos y de qué edad?</label>
+            <input type="text" id="menores-detalle" name="menoresDetalle" placeholder="Ej: 2 chicos, de 4 y 9 años">
+            <p class="ayuda">Es para el menú infantil y para calcular las sillas.</p>
+          </div>
+
+          <div class="campo">
+            <label for="accesibilidad">¿Algo que debamos tener en cuenta para que la pases bien?</label>
+            <input type="text" id="accesibilidad" name="accesibilidad" placeholder="Movilidad reducida, embarazo, medicación, lo que sea">
+            <p class="ayuda">Opcional. Nos sirve para ubicarte cómodo y resolverlo sin que tengas que pedirlo esa noche.</p>
+          </div>
+
+          <div class="campo">
+            <label for="cancion">Una canción que no puede faltar</label>
+            <input type="text" id="cancion" name="cancion" placeholder="La que te saca a bailar sí o sí">
+          </div>
+
+          <!-- ✎ PENDIENTE: la pregunta disruptiva. Cambiar label y placeholder. -->
+          <div class="campo" id="campo-extra">
+            <label for="extra">PREGUNTA PENDIENTE DE DEFINIR</label>
+            <input type="text" id="extra" name="extra" placeholder="">
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="mensaje">Dejanos un mensaje</label>
+          <textarea id="mensaje" name="mensaje" placeholder="Opcional, pero se agradece"></textarea>
+        </div>
+
+        <button class="enviar" type="submit" id="btn">Enviar confirmación</button>
+        <p class="error" id="error" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="gracias oculto" id="gracias">
+        <h3 id="gracias-titulo">¡Gracias!</h3>
+        <p id="gracias-texto"></p>
+        <svg class="mono-mini" viewBox="0 0 300 200" aria-hidden="true">
+          <g fill="none" stroke="var(--vino)" stroke-width="6" stroke-linecap="round">
+            <path d="M78 172 C40 146 22 122 22 100 C22 82 34 70 50 70 C63 70 73 78 78 88 C83 78 93 70 106 70 C122 70 134 82 134 100 C134 122 116 146 78 172 Z"/>
+            <path d="M222 172 C184 146 166 122 166 100 C166 82 178 70 194 70 C207 70 217 78 222 88 C227 78 237 70 250 70 C266 70 278 82 278 100 C278 122 260 146 222 172 Z"/>
+            <path d="M134 108 C144 104 156 104 166 108"/>
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <svg class="mono-mini" viewBox="0 0 300 200" aria-hidden="true">
+    <g fill="none" stroke="var(--crema)" stroke-width="6" stroke-linecap="round">
+      <path d="M78 172 C40 146 22 122 22 100 C22 82 34 70 50 70 C63 70 73 78 78 88 C83 78 93 70 106 70 C122 70 134 82 134 100 C134 122 116 146 78 172 Z"/>
+      <path d="M222 172 C184 146 166 122 166 100 C166 82 178 70 194 70 C207 70 217 78 222 88 C227 78 237 70 250 70 C266 70 278 82 278 100 C278 122 260 146 222 172 Z"/>
+      <path d="M134 108 C144 104 156 104 166 108"/>
+    </g>
+  </svg>
+  <p>Mica &amp; Juani · 28.11.26</p>
+  <p class="f2">La Posada Multiespacios · Benavídez</p>
+</footer>
+
+
+<script>
+/* ============================================================
+   1. ADÓNDE VAN LOS DATOS
+   Pegá acá la URL de tu Google Apps Script (ver INSTRUCCIONES.md).
+   Mientras esté vacío, las confirmaciones se guardan localmente
+   para que puedas probar el formulario.
+   ============================================================ */
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbzCBmuqhezAbGMXnfLya6Bk2AVClkEDS6ylTcJhY03JmGW6kPP5oS3IEnze_Py92aU/exec";
+
+/* ---------- red de seguridad: publicar sin planilla conectada ---------- */
+if(!ENDPOINT){
+  const av=document.createElement('div');
+  av.textContent='⚠ Falta pegar la URL de la planilla en ENDPOINT: las confirmaciones NO se estan guardando.';
+  av.style.cssText='position:fixed;top:0;left:0;right:0;z-index:999;background:#B00020;color:#fff;'+
+    'font:600 13px/1.4 system-ui,sans-serif;padding:.7rem 1rem;text-align:center';
+  document.addEventListener('DOMContentLoaded',()=>document.body.appendChild(av));
+  console.warn('ENDPOINT vacio: el formulario no guarda nada.');
+}
+
+/* ---------- cuenta regresiva ---------- */
+(function(){
+  const target = new Date('2026-11-28T19:00:00-03:00').getTime();
+  const d=document.getElementById('c-dias'),h=document.getElementById('c-horas'),m=document.getElementById('c-min');
+  function tick(){
+    const diff = target - Date.now();
+    if(diff<=0){document.getElementById('cuenta').innerHTML='<div><b>¡Hoy!</b></div>';return;}
+    d.textContent=Math.floor(diff/864e5);
+    h.textContent=Math.floor(diff/36e5)%24;
+    m.textContent=Math.floor(diff/6e4)%60;
+  }
+  tick(); setInterval(tick,30000);
+})();
+
+/* ---------- revelados al scrollear ---------- */
+(function(){
+  const io=new IntersectionObserver((es)=>{
+    es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.18,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal,.frase__mono').forEach(el=>io.observe(el));
+  // el hero entra solo al cargar
+  requestAnimationFrame(()=>document.querySelectorAll('.hero .reveal').forEach(el=>el.classList.add('in')));
+})();
+
+/* ---------- lógica del formulario ---------- */
+const form=document.getElementById('form');
+const bloqueSi=document.getElementById('bloque-si');
+const campoDetalle=document.getElementById('campo-detalle');
+const errorBox=document.getElementById('error');
+const btn=document.getElementById('btn');
+
+document.querySelectorAll('input[name=asiste]').forEach(r=>{
+  r.addEventListener('change',()=>{
+    bloqueSi.classList.toggle('oculto', r.value!=='Sí');
+    errorBox.textContent='';
+  });
+});
+
+const campoSevera=document.getElementById('campo-severa');
+const campoAcompDieta=document.getElementById('campo-acomp-dieta');
+const campoMenores=document.getElementById('campo-menores');
+const dietas=[...document.querySelectorAll('input[name=dieta]')];
+
+dietas.forEach(c=>{
+  c.addEventListener('change',()=>{
+    // "Como de todo" es excluyente
+    if(c.value==='Como de todo' && c.checked){dietas.forEach(o=>{if(o!==c)o.checked=false;});}
+    else if(c.checked){const n=dietas.find(o=>o.value==='Como de todo'); if(n)n.checked=false;}
+    const alergia = dietas.some(o=>o.checked && o.value==='Alergia');
+    const pideDetalle = dietas.some(o=>o.checked && (o.value==='Alergia'||o.value==='Otra'));
+    campoDetalle.classList.toggle('oculto', !pideDetalle);
+    campoSevera.classList.toggle('oculto', !alergia);
+    if(!pideDetalle) document.getElementById('detalle').value='';
+    if(!alergia) document.querySelectorAll('input[name=severa]').forEach(x=>x.checked=false);
+  });
+});
+
+// las restricciones de los acompañantes solo se preguntan si hay acompañantes
+// las restricciones de los demas solo se preguntan si viene mas de uno
+document.getElementById('cuantos').addEventListener('input',e=>{
+  const n = parseInt(e.target.value,10);
+  const varios = Number.isFinite(n) && n > 1;
+  campoAcompDieta.classList.toggle('oculto', !varios);
+  if(!varios) document.getElementById('dieta-acomp').value='';
+});
+
+document.querySelectorAll('input[name=menores]').forEach(r=>{
+  r.addEventListener('change',()=>{
+    const con = r.value==='Sí';
+    campoMenores.classList.toggle('oculto', !con);
+    if(!con) document.getElementById('menores-detalle').value='';
+  });
+});
+
+const val=id=>document.getElementById(id).value.trim();
+
+form.addEventListener('submit',async e=>{
+  e.preventDefault();
+  errorBox.textContent='';
+  const asisteEl=document.querySelector('input[name=asiste]:checked');
+
+  if(!val('nombre')){errorBox.textContent='Nos falta tu nombre.';document.getElementById('nombre').focus();return;}
+  if(!val('contacto')){errorBox.textContent='Dejanos un WhatsApp o un mail para poder avisarte cosas.';document.getElementById('contacto').focus();return;}
+  if(!asisteEl){errorBox.textContent='Contanos si venís o no.';return;}
+  if(asisteEl.value==='Sí'){
+    const n = parseInt(val('cuantos'),10);
+    if(!Number.isFinite(n) || n < 1 || n > 12){
+      errorBox.textContent='Decinos cuántos van en total, contándote (un número del 1 al 12).';
+      document.getElementById('cuantos').focus();return;
+    }
+    if(!dietas.some(c=>c.checked)){
+      errorBox.textContent='Marcá al menos una opción de comida (si comés de todo, marcá esa).';
+      document.getElementById('d0').focus();return;
+    }
+  }
+
+  const viene = asisteEl.value==='Sí';
+  const marcado=n=>{const el=document.querySelector('input[name='+n+']:checked');return el?el.value:'';};
+  const solo=v=>viene?v:'';
+  const datos={
+    fecha:new Date().toLocaleString('es-AR',{timeZone:'America/Argentina/Buenos_Aires'}),
+    nombre:val('nombre'),
+    contacto:val('contacto'),
+    asiste:asisteEl.value,
+    cuantos:solo(val('cuantos')),
+    dieta:solo(dietas.filter(c=>c.checked).map(c=>c.value).join(', ')),
+    detalle:solo(val('detalle')),
+    severa:solo(marcado('severa')),
+    dietaAcomp:solo(val('dieta-acomp')),
+    menores:solo(marcado('menores')),
+    menoresDetalle:solo(val('menores-detalle')),
+    accesibilidad:solo(val('accesibilidad')),
+    cancion:solo(val('cancion')),
+    extra:val('extra'),
+    mensaje:val('mensaje')
+  };
+
+  btn.disabled=true; btn.textContent='Enviando, no cierres la página…';
+  errorBox.textContent='Puede tardar unos segundos. Ya lo estamos guardando.';
+  try{
+    await guardar(datos);
+    errorBox.textContent='';
+    form.classList.add('oculto');
+    const g=document.getElementById('gracias');
+    document.getElementById('gracias-titulo').textContent = viene ? '¡Nos vemos!' : 'Gracias igual';
+    document.getElementById('gracias-texto').textContent = viene
+      ? 'Quedó anotada tu confirmación. Te vamos a escribir más cerca de la fecha con los últimos detalles.'
+      : 'Nos da pena, pero gracias por avisarnos. Te vamos a extrañar esa noche.';
+    g.classList.remove('oculto');
+    g.scrollIntoView({behavior:'smooth',block:'center'});
+  }catch(err){
+    console.error(err);
+    errorBox.textContent='No pudimos enviarlo. Probá de nuevo o escribinos por WhatsApp.';
+    btn.disabled=false; btn.textContent='Enviar confirmación';
+  }
+});
+
+async function guardar(datos){
+  if(ENDPOINT){
+    // text/plain evita el preflight CORS que Apps Script no responde
+    const r=await fetch(ENDPOINT,{
+      method:'POST',
+      headers:{'Content-Type':'text/plain;charset=utf-8'},
+      body:JSON.stringify(datos)
+    });
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    return;
+  }
+  // Sin ENDPOINT no hay donde guardar: fallar fuerte es mejor que fingir que
+  // se guardo. Si esto salta en produccion, es que falta pegar la URL arriba.
+  throw new Error('ENDPOINT vacio: la confirmacion no se guardo en ningun lado');
+}
+
+</script>
+</body>
+</html>

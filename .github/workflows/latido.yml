@@ -26,9 +26,11 @@ jobs:
     timeout-minutes: 5
 
     steps:
-      - uses: actions/checkout@v4
+      # v4/v5 corren sobre Node 20, que GitHub esta deprecando. Detectado el
+      # 26/08/2026 en el warning del primer run.
+      - uses: actions/checkout@v5
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@v6
         with:
           python-version: "3.11"
 

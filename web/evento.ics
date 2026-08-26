@@ -1,0 +1,21 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Mica y Juani//Casamiento 2026//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:casamiento-mica-juani-20261128@bodamicayjuani.com
+DTSTAMP:20260826T180000Z
+DTSTART:20261128T220000Z
+DTEND:20261129T090000Z
+SUMMARY:Casamiento de Mica & Juani
+DESCRIPTION:Ceremonia y fiesta en La Posada Multiespacios.\nConfirmá tu asistencia en https://bodamicayjuani.com
+LOCATION:La Posada Multiespacios\, J. M. Loreto 4551\, Benavídez\, Buenos Aires
+URL:https://bodamicayjuani.com
+BEGIN:VALARM
+TRIGGER:-P2D
+ACTION:DISPLAY
+DESCRIPTION:En dos días es el casamiento de Mica y Juani
+END:VALARM
+END:VEVENT
+END:VCALENDAR

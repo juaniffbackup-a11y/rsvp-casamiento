@@ -418,12 +418,6 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.5;font-size:.6rem}
             <label for="cancion">Una canción que no puede faltar</label>
             <input type="text" id="cancion" name="cancion" placeholder="La que te saca a bailar sí o sí">
           </div>
-
-          <!-- ✎ PENDIENTE: la pregunta disruptiva. Cambiar label y placeholder. -->
-          <div class="campo" id="campo-extra">
-            <label for="extra">PREGUNTA PENDIENTE DE DEFINIR</label>
-            <input type="text" id="extra" name="extra" placeholder="">
-          </div>
         </div>
 
         <div class="campo">
@@ -597,7 +591,6 @@ form.addEventListener('submit',async e=>{
     menoresDetalle:solo(val('menores-detalle')),
     accesibilidad:solo(val('accesibilidad')),
     cancion:solo(val('cancion')),
-    extra:val('extra'),
     mensaje:val('mensaje')
   };
 

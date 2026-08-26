@@ -73,60 +73,56 @@ function doGet() {
  * Arma la pestaña "Resumen": lo que Juani y Mica necesitan ver de un vistazo,
  * sin leer 275 filas y sin depender de que alguien corra un script.
  *
- * Son FORMULAS, no valores: se actualizan solas cada vez que llega una
- * confirmacion nueva. Correr esta funcion UNA VEZ desde el editor de Apps
- * Script (elegirla en el desplegable de arriba y darle Ejecutar).
+ * Correr UNA VEZ desde el editor (elegirla en el desplegable y dar Ejecutar).
  *
- * Lo que NO esta aca, y sigue siendo manual: el cruce contra la lista del
- * planner (quien falta contestar, quien confirmo distinto de lo reservado).
- * Esa lista vive en otro archivo, de otra cuenta, y la edita Yani.
+ * OJO con las formulas: setValues() escribe el texto literal, y en una planilla
+ * en español el separador de argumentos es ';' y no ','. Por eso todo daba
+ * #ERROR la primera vez. setFormula() SI traduce al idioma de la planilla,
+ * asi que las formulas van por ahi, una por una.
  */
 function armarResumen() {
   const libro = SpreadsheetApp.getActiveSpreadsheet();
   let h = libro.getSheetByName('Resumen');
-  if (h) libro.deleteSheet(h);          // se rehace limpio cada vez
-  h = libro.insertSheet('Resumen', 0);  // primera pestaña: es lo que se mira
+  if (h) libro.deleteSheet(h);
+  h = libro.insertSheet('Resumen', 0);
 
-  const R = "'" + HOJA + "'";           // referencia a la hoja de respuestas
-  const filas = [
-    ['CONFIRMACIONES', ''],
-    ['Mica & Juani · 28 de noviembre de 2026', ''],
-    ['', ''],
-    ['CUBIERTOS CONFIRMADOS', `=SUMIF(${R}!D2:D,"Sí",${R}!E2:E)`],
-    ['', ''],
-    ['Respuestas recibidas', `=COUNTA(${R}!B2:B)`],
-    ['Confirmaron que vienen', `=COUNTIF(${R}!D2:D,"Sí")`],
-    ['Dijeron que no', `=COUNTIF(${R}!D2:D,"No")`],
-    ['Última respuesta', `=IFERROR(INDEX(${R}!A2:A,COUNTA(${R}!A2:A)),"todavía ninguna")`],
-    ['', ''],
-    ['REVISAR', ''],
-    ['Nombres repetidos',
-     `=IFERROR(IF(COUNTA(${R}!B2:B)=0,"—",TEXTJOIN(", ",TRUE,` +
-     `FILTER(UNIQUE(${R}!B2:B),COUNTIF(${R}!B2:B,UNIQUE(${R}!B2:B))>1))),"ninguno")`],
-    ['', 'Si aparece alguien acá, mandó el formulario dos veces y sus cubiertos se están contando doble.'],
-    ['', ''],
-    ['ALERGIAS SEVERAS', `=COUNTIF(${R}!H2:H,"Sí*")`],
-    ['',
-     `=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER(${R}!B2:B&" — "&${R}!G2:G,LEFT(${R}!H2:H,2)="Sí")),"ninguna")`],
-    ['', 'Estas van SEPARADAS al salón. No son preferencias: son riesgo médico.'],
-    ['', ''],
-    ['OTRAS RESTRICCIONES', ''],
-    ['',
-     `=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER(${R}!B2:B&" — "&${R}!F2:F,` +
-     `${R}!F2:F<>"",${R}!F2:F<>"Como de todo")),"ninguna")`],
-    ['', ''],
-    ['DE LOS ACOMPAÑANTES', ''],
-    ['',
-     `=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER("con "&${R}!B2:B&": "&${R}!I2:I,${R}!I2:I<>"")),"ninguna")`],
-    ['', ''],
-    ['VIENEN CON CHICOS', ''],
-    ['',
-     `=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER(${R}!B2:B&" — "&${R}!K2:K,${R}!K2:K<>"")),"ninguno")`],
+  const R = "'" + HOJA + "'";
+
+  // 1) los textos de la columna A
+  const textos = [
+    ['CONFIRMACIONES'], ['Mica & Juani · 28 de noviembre de 2026'], [''],
+    ['CUBIERTOS CONFIRMADOS'], [''],
+    ['Respuestas recibidas'], ['Confirmaron que vienen'], ['Dijeron que no'],
+    ['Última respuesta'], [''],
+    ['REVISAR'], ['Nombres repetidos'], [''], [''],
+    ['ALERGIAS SEVERAS'], [''], [''], [''],
+    ['OTRAS RESTRICCIONES'], [''], [''],
+    ['DE LOS ACOMPAÑANTES'], [''], [''],
+    ['VIENEN CON CHICOS'], ['']
   ];
+  h.getRange(1, 1, textos.length, 1).setValues(textos);
 
-  h.getRange(1, 1, filas.length, 2).setValues(filas);
+  // 2) las aclaraciones de la columna B
+  h.getRange('B13').setValue('Si aparece alguien acá, mandó el formulario dos veces y sus cubiertos se están contando doble.');
+  h.getRange('B17').setValue('Estas van SEPARADAS al salón. No son preferencias: son riesgo médico.');
 
-  // formato: que se lea de un vistazo, no que parezca una planilla contable
+  // 3) las formulas, UNA POR UNA con setFormula para que se traduzcan
+  const f = {
+    'B4':  `=SUMIF(${R}!D2:D,"Sí",${R}!E2:E)`,
+    'B6':  `=COUNTA(${R}!B2:B)`,
+    'B7':  `=COUNTIF(${R}!D2:D,"Sí")`,
+    'B8':  `=COUNTIF(${R}!D2:D,"No")`,
+    'B9':  `=IFERROR(INDEX(${R}!A2:A,COUNTA(${R}!A2:A)),"todavía ninguna")`,
+    'B12': `=IFERROR(IF(COUNTA(${R}!B2:B)=0,"—",TEXTJOIN(", ",TRUE,FILTER(UNIQUE(${R}!B2:B),COUNTIF(${R}!B2:B,UNIQUE(${R}!B2:B))>1))),"ninguno")`,
+    'B15': `=COUNTIF(${R}!H2:H,"Sí*")`,
+    'B16': `=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER(${R}!B2:B&" — "&${R}!G2:G,LEFT(${R}!H2:H,2)="Sí")),"ninguna")`,
+    'B20': `=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER(${R}!B2:B&" — "&${R}!F2:F,${R}!F2:F<>"",${R}!F2:F<>"Como de todo")),"ninguna")`,
+    'B23': `=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER("con "&${R}!B2:B&": "&${R}!I2:I,${R}!I2:I<>"")),"ninguna")`,
+    'B26': `=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER(${R}!B2:B&" — "&${R}!K2:K,${R}!K2:K<>"")),"ninguno")`
+  };
+  for (const celda in f) h.getRange(celda).setFormula(f[celda]);
+
+  // 4) formato
   h.setColumnWidth(1, 230);
   h.setColumnWidth(2, 560);
   h.getRange('A1').setFontSize(16).setFontWeight('bold');
@@ -140,5 +136,7 @@ function armarResumen() {
   h.getRange('B1:B30').setWrap(true).setVerticalAlignment('top');
   h.setFrozenRows(2);
 
-  SpreadsheetApp.getUi().alert('Listo. La pestaña "Resumen" se actualiza sola con cada confirmación nueva.');
+  // console.log SIEMPRE funciona; getUi() revienta si no se corre con la
+  // planilla abierta, que es lo que paso la primera vez.
+  console.log('Resumen armado. Locale de la planilla: ' + libro.getSpreadsheetLocale());
 }

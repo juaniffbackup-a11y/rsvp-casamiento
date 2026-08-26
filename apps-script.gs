@@ -113,7 +113,10 @@ function armarResumen() {
     'B6':  `=COUNTA(${B})`,
     'B7':  `=COUNTIF(${D}${C}"Sí")`,
     'B8':  `=COUNTIF(${D}${C}"No")`,
-    'B9':  `=IFERROR(INDEX(${A}${C}COUNTA(${A}))${C}"todavía ninguna")`,
+    // INDEX(rango, 0) NO devuelve "la fila cero": devuelve la columna entera,
+    // que no entra en una celda y da #REF. Con la hoja vacia COUNTA da 0, asi
+    // que hay que preguntar ANTES si hay filas.
+    'B9':  `=IF(COUNTA(${A})=0${C}"todavía ninguna"${C}INDEX(${A}${C}COUNTA(${A})))`,
     'B12': `=IFERROR(IF(COUNTA(${B})=0${C}"—"${C}TEXTJOIN(", "${C}TRUE${C}FILTER(UNIQUE(${B})${C}COUNTIF(${B}${C}UNIQUE(${B}))>1)))${C}"ninguno")`,
     'B15': `=COUNTIF(${H}${C}"Sí*")`,
     'B16': `=IFERROR(TEXTJOIN(CHAR(10)${C}TRUE${C}FILTER(${B}&" — "&${G}${C}LEFT(${H}${C}2)="Sí"))${C}"ninguna")`,

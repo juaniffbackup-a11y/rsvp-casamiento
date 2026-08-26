@@ -70,25 +70,29 @@ function doGet() {
 
 
 /**
- * Arma la pestaña "Resumen": lo que Juani y Mica necesitan ver de un vistazo,
- * sin leer 275 filas y sin depender de que alguien corra un script.
+ * Arma la pestaña "Resumen". Correr UNA VEZ desde el editor.
  *
- * Correr UNA VEZ desde el editor (elegirla en el desplegable y dar Ejecutar).
- *
- * OJO con las formulas: setValues() escribe el texto literal, y en una planilla
- * en español el separador de argumentos es ';' y no ','. Por eso todo daba
- * #ERROR la primera vez. setFormula() SI traduce al idioma de la planilla,
- * asi que las formulas van por ahi, una por una.
+ * EL PROBLEMA DEL SEPARADOR (26/08/2026, dos intentos fallidos):
+ * en una planilla en español el separador de argumentos es ';' y no ','.
+ * Ni setValues() ni setFormula() traducen: escriben el texto tal cual, y
+ * todo lo que tuviera mas de un argumento daba #ERROR. COUNTA funcionaba
+ * de casualidad, porque lleva uno solo.
+ * Solucion: se lee el locale de la planilla y se arma el separador correcto.
  */
 function armarResumen() {
   const libro = SpreadsheetApp.getActiveSpreadsheet();
+  const loc = libro.getSpreadsheetLocale();          // ej: 'es_ES', 'en_US'
+  const C = loc.toLowerCase().indexOf('en_') === 0 ? ',' : ';';
+
   let h = libro.getSheetByName('Resumen');
   if (h) libro.deleteSheet(h);
   h = libro.insertSheet('Resumen', 0);
 
   const R = "'" + HOJA + "'";
+  const B = R + '!B2:B', D = R + '!D2:D', E = R + '!E2:E';
+  const F = R + '!F2:F', G = R + '!G2:G', H = R + '!H2:H';
+  const I = R + '!I2:I', K = R + '!K2:K', A = R + '!A2:A';
 
-  // 1) los textos de la columna A
   const textos = [
     ['CONFIRMACIONES'], ['Mica & Juani · 28 de noviembre de 2026'], [''],
     ['CUBIERTOS CONFIRMADOS'], [''],
@@ -101,28 +105,24 @@ function armarResumen() {
     ['VIENEN CON CHICOS'], ['']
   ];
   h.getRange(1, 1, textos.length, 1).setValues(textos);
-
-  // 2) las aclaraciones de la columna B
   h.getRange('B13').setValue('Si aparece alguien acá, mandó el formulario dos veces y sus cubiertos se están contando doble.');
   h.getRange('B17').setValue('Estas van SEPARADAS al salón. No son preferencias: son riesgo médico.');
 
-  // 3) las formulas, UNA POR UNA con setFormula para que se traduzcan
   const f = {
-    'B4':  `=SUMIF(${R}!D2:D,"Sí",${R}!E2:E)`,
-    'B6':  `=COUNTA(${R}!B2:B)`,
-    'B7':  `=COUNTIF(${R}!D2:D,"Sí")`,
-    'B8':  `=COUNTIF(${R}!D2:D,"No")`,
-    'B9':  `=IFERROR(INDEX(${R}!A2:A,COUNTA(${R}!A2:A)),"todavía ninguna")`,
-    'B12': `=IFERROR(IF(COUNTA(${R}!B2:B)=0,"—",TEXTJOIN(", ",TRUE,FILTER(UNIQUE(${R}!B2:B),COUNTIF(${R}!B2:B,UNIQUE(${R}!B2:B))>1))),"ninguno")`,
-    'B15': `=COUNTIF(${R}!H2:H,"Sí*")`,
-    'B16': `=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER(${R}!B2:B&" — "&${R}!G2:G,LEFT(${R}!H2:H,2)="Sí")),"ninguna")`,
-    'B20': `=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER(${R}!B2:B&" — "&${R}!F2:F,${R}!F2:F<>"",${R}!F2:F<>"Como de todo")),"ninguna")`,
-    'B23': `=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER("con "&${R}!B2:B&": "&${R}!I2:I,${R}!I2:I<>"")),"ninguna")`,
-    'B26': `=IFERROR(TEXTJOIN(CHAR(10),TRUE,FILTER(${R}!B2:B&" — "&${R}!K2:K,${R}!K2:K<>"")),"ninguno")`
+    'B4':  `=SUMIF(${D}${C}"Sí"${C}${E})`,
+    'B6':  `=COUNTA(${B})`,
+    'B7':  `=COUNTIF(${D}${C}"Sí")`,
+    'B8':  `=COUNTIF(${D}${C}"No")`,
+    'B9':  `=IFERROR(INDEX(${A}${C}COUNTA(${A}))${C}"todavía ninguna")`,
+    'B12': `=IFERROR(IF(COUNTA(${B})=0${C}"—"${C}TEXTJOIN(", "${C}TRUE${C}FILTER(UNIQUE(${B})${C}COUNTIF(${B}${C}UNIQUE(${B}))>1)))${C}"ninguno")`,
+    'B15': `=COUNTIF(${H}${C}"Sí*")`,
+    'B16': `=IFERROR(TEXTJOIN(CHAR(10)${C}TRUE${C}FILTER(${B}&" — "&${G}${C}LEFT(${H}${C}2)="Sí"))${C}"ninguna")`,
+    'B20': `=IFERROR(TEXTJOIN(CHAR(10)${C}TRUE${C}FILTER(${B}&" — "&${F}${C}${F}<>""${C}${F}<>"Como de todo"))${C}"ninguna")`,
+    'B23': `=IFERROR(TEXTJOIN(CHAR(10)${C}TRUE${C}FILTER("con "&${B}&": "&${I}${C}${I}<>""))${C}"ninguna")`,
+    'B26': `=IFERROR(TEXTJOIN(CHAR(10)${C}TRUE${C}FILTER(${B}&" — "&${K}${C}${K}<>""))${C}"ninguno")`
   };
   for (const celda in f) h.getRange(celda).setFormula(f[celda]);
 
-  // 4) formato
   h.setColumnWidth(1, 230);
   h.setColumnWidth(2, 560);
   h.getRange('A1').setFontSize(16).setFontWeight('bold');
@@ -136,7 +136,7 @@ function armarResumen() {
   h.getRange('B1:B30').setWrap(true).setVerticalAlignment('top');
   h.setFrozenRows(2);
 
-  // console.log SIEMPRE funciona; getUi() revienta si no se corre con la
-  // planilla abierta, que es lo que paso la primera vez.
-  console.log('Resumen armado. Locale de la planilla: ' + libro.getSpreadsheetLocale());
+  // se deja constancia de con que separador se armo, para no volver a adivinar
+  console.log('Resumen armado. Locale: ' + loc + ' | separador usado: "' + C + '"');
+  console.log('Ejemplo de formula generada: ' + f['B7']);
 }

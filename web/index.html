@@ -24,7 +24,7 @@
 :root{
   --vino:#73302F;
   --vino-claro:#8A3F42;
-  --bosque:#4A5A42;
+  --bosque:#55684B;
   --salvia:#768462;
   --crema:#E4D8C2;
   --crema-suave:#F0E9DB;
@@ -78,36 +78,36 @@ a{color:inherit}
    HERO
    ============================================================ */
 .hero{
-  min-height:100svh;background:var(--vino);color:var(--crema);
+  min-height:100svh;background:var(--crema);color:var(--vino);
   display:grid;place-items:center;text-align:center;
   padding:clamp(3rem,8vw,6rem) var(--gutter);position:relative;overflow:hidden;
 }
 .hero::after{ /* halo cálido, como la tinta sobre papel */
   content:"";position:absolute;inset:0;
-  background:radial-gradient(120% 90% at 50% 40%,rgba(255,255,255,.07),transparent 60%);
+  background:radial-gradient(120% 90% at 50% 40%,rgba(255,255,255,.55),transparent 62%);
   pointer-events:none;
 }
 .hero__inner{position:relative;z-index:2}
 .hero__fecha{
   font-size:clamp(.86rem,1.9vw,1.06rem);letter-spacing:.52em;text-transform:uppercase;
-  margin:0 0 clamp(1rem,3vw,2rem);opacity:.85;padding-left:.6em;
+  margin:0 0 clamp(1rem,3vw,2rem);opacity:.85;padding-left:.6em;color:var(--vino);
 }
 .hero__nombres{
   font-family:var(--display);font-size:clamp(4.2rem,13vw,10.5rem);
-  line-height:.78;margin:0;color:var(--crema);
+  line-height:.78;margin:0;color:var(--vino);
 }
 .hero__nombres .amp{font-size:.62em;display:inline-block;transform:translateY(-.12em);padding-inline:.06em}
 .hero__linea{
-  width:clamp(60px,10vw,110px);height:1px;background:var(--crema);
-  opacity:.5;margin:clamp(1.4rem,3vw,2rem) auto;
+  width:clamp(60px,10vw,110px);height:1px;background:var(--vino);
+  opacity:.45;margin:clamp(1.4rem,3vw,2rem) auto;
 }
 .hero__claim{font-size:clamp(1.08rem,2.1vw,1.28rem);letter-spacing:.04em;margin:0 auto 2.6rem;opacity:.9;font-weight:300;max-width:36ch}
 .hero__cta{
-  display:inline-block;text-decoration:none;border:1px solid rgba(228,216,194,.55);
+  display:inline-block;text-decoration:none;border:1px solid rgba(115,48,47,.45);
   padding:1em 2.7em;font-size:.82rem;letter-spacing:.28em;text-transform:uppercase;
   transition:background .35s ease,color .35s ease,border-color .35s ease;
 }
-.hero__cta:hover{background:var(--crema);color:var(--vino);border-color:var(--crema)}
+.hero__cta:hover{background:var(--vino);color:var(--crema);border-color:var(--vino)}
 .hero__scroll{
   position:absolute;bottom:2.2rem;left:50%;transform:translateX(-50%);
   font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;opacity:.72;z-index:2;
@@ -124,7 +124,7 @@ a{color:inherit}
    MONOGRAMA + FRASE
    ============================================================ */
 .frase{text-align:center}
-.frase__mono{width:min(230px,52vw);margin:0 auto clamp(2rem,5vw,3rem)}
+.frase__mono{width:min(230px,52vw);margin:0 auto}
 .frase__mono path,.frase__mono line{
   fill:none;stroke:var(--vino);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;
 }
@@ -144,36 +144,36 @@ a{color:inherit}
 /* ============================================================
    DATOS DEL EVENTO
    ============================================================ */
-.datos{background:var(--vino);color:var(--crema)}
+.datos{background:var(--crema-suave);color:var(--vino)}
 .datos__grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-  gap:clamp(2.5rem,6vw,4rem);text-align:center;
+  display:grid;grid-template-columns:1fr;
+  gap:clamp(2.4rem,6vw,3.4rem);text-align:center;max-width:32rem;margin-inline:auto;
 }
 .dato{display:flex;flex-direction:column}
-.dato__link{margin-top:auto;padding-top:clamp(1.4rem,3vw,2rem)}
+.dato__link{margin-top:.85rem}
 .dato h3{
   font-family:var(--texto);font-weight:500;font-size:.68rem;letter-spacing:.36em;
-  text-transform:uppercase;margin:0 0 1.1rem;opacity:.7;
+  text-transform:uppercase;margin:0 0 1.1rem;color:var(--bosque);
 }
 .dato p{margin:0;font-size:1.12rem;font-weight:300;line-height:1.6}
 .dato strong{display:block;font-family:var(--display);font-size:2.6rem;font-weight:400;line-height:1;margin-bottom:.35rem}
 .link-fino{
-  display:inline-block;text-decoration:none;border-bottom:1px solid rgba(228,216,194,.5);
+  display:inline-block;text-decoration:none;border-bottom:1px solid rgba(115,48,47,.42);
   padding-bottom:.4em;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;
   transition:border-color .3s,opacity .3s;
 }
-.link-fino:hover{border-color:var(--crema);opacity:.75}
+.link-fino:hover{border-color:var(--vino);opacity:.68}
 
 /* cuenta regresiva */
 .cuenta{display:flex;justify-content:center;gap:clamp(1.6rem,5vw,3.4rem);margin-top:clamp(3rem,7vw,4.2rem)}
 .cuenta div{text-align:center}
 .cuenta b{display:block;font-family:var(--display);font-size:clamp(3rem,8vw,4.4rem);font-weight:400;line-height:1}
-.cuenta span{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;opacity:.65}
+.cuenta span{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;opacity:.85}
 
 /* ============================================================
    RSVP
    ============================================================ */
-.rsvp{background:var(--bosque);color:var(--crema-suave)}
+.rsvp{background:var(--papel);color:var(--tinta)}
 .rsvp__card{
   background:var(--papel-alto);color:var(--tinta);
   border-radius:clamp(120px,26vw,260px) clamp(120px,26vw,260px) 8px 8px;
@@ -232,12 +232,12 @@ a{color:inherit}
 /* ============================================================
    FOOTER
    ============================================================ */
-footer{background:var(--vino);color:var(--crema);text-align:center;padding:clamp(3.5rem,8vw,5rem) var(--gutter)}
+footer{background:var(--crema);color:var(--vino);text-align:center;padding:clamp(3.5rem,8vw,5rem) var(--gutter)}
 footer .mono-mini{width:120px;margin:0 auto 1.8rem;opacity:.85}
-footer .mono-mini path{stroke:var(--crema)}
-footer .mono-mini text{fill:var(--crema)}
-footer p{margin:0;font-size:.66rem;letter-spacing:.36em;text-transform:uppercase;opacity:.8}
-footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.5;font-size:.6rem}
+footer .mono-mini path{stroke:var(--vino)}
+footer .mono-mini text{fill:var(--vino)}
+footer p{margin:0;font-size:.66rem;letter-spacing:.36em;text-transform:uppercase;opacity:.9}
+footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.85;font-size:.6rem}
 
 
 @media (prefers-reduced-motion:reduce){
@@ -249,7 +249,7 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.5;font-size:.6rem}
 }
 
 /* ══════════════ REGALOS ══════════════ */
-.regalos{background:var(--papel);text-align:center}
+.regalos{background:var(--crema-suave);text-align:center}
 .regalos h2{font-family:var(--display);font-size:clamp(2.8rem,8vw,4.2rem);color:var(--vino);margin:0 0 1.2rem;font-weight:400;line-height:1}
 .regalos__intro{margin:0 auto;max-width:34rem;font-weight:300;font-size:1.05rem;line-height:1.7;color:rgba(42,38,34,.8)}
 .regalos__toggle{
@@ -307,7 +307,7 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.5;font-size:.6rem}
     <p class="hero__fecha reveal">28 · 11 · 2026</p>
     <h1 class="hero__nombres reveal d1">Mica <span class="amp">&amp;</span> Juani</h1>
     <div class="hero__linea reveal d2"></div>
-    <p class="hero__claim reveal d2">Nos casamos, y queremos que estés.</p>
+    <p class="hero__claim reveal d2">Nos casamos, y queremos compartir ese momento con vos.</p>
     <a class="hero__cta reveal d3" href="#confirmar">Confirmá tu asistencia</a>
   </div>
   <div class="hero__scroll" aria-hidden="true">Seguí<span></span></div>
@@ -336,7 +336,6 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.5;font-size:.6rem}
       <text class="ink" x="222" y="128" text-anchor="middle" font-family="Italianno, cursive" font-size="62">J</text>
       <text class="ink" x="150" y="192" text-anchor="middle" font-family="Italianno, cursive" font-size="44">28/11</text>
     </svg>
-    <h2 class="frase__texto reveal">Que el tiempo nos encuentre <em>siempre juntos</em></h2>
   </div>
 </section>
 
@@ -380,6 +379,7 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.5;font-size:.6rem}
     <div class="rsvp__card">
       <div class="rsvp__head">
         <h2>Confirmá tu lugar</h2>
+        <p>Uno por invitado, por favor.</p>
       </div>
 
       <form id="form" novalidate>
@@ -418,7 +418,6 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.5;font-size:.6rem}
           <div class="campo oculto" id="campo-detalle">
             <label for="detalle">Contanos cuál</label>
             <input type="text" id="detalle" name="detalle" placeholder="Frutos secos, mariscos, huevo…">
-            <p class="ayuda">Cuanto más preciso, mejor lo resuelve la cocina. Si es una alergia severa, aclaranoslo acá y avisamos para que tu plato se prepare aparte.</p>
           </div>
 
           <div class="campo">
@@ -457,8 +456,8 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.5;font-size:.6rem}
   <div class="wrap">
     <h2 class="reveal">Regalos</h2>
     <p class="regalos__intro reveal d1">
-      Lo más importante para nosotros es que estés ese día. Si además tenés ganas
-      de hacernos un regalo, te dejamos los datos acá.
+      No armamos lista ni esperamos nada. Si querés hacernos un regalo,
+      esto es lo que más nos sirve.
     </p>
     <button class="regalos__toggle reveal d1" type="button"
             id="btn-regalos" aria-haspopup="dialog">
@@ -498,7 +497,7 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.5;font-size:.6rem}
 
 <footer>
   <svg class="mono-mini" viewBox="0 0 300 200" aria-hidden="true">
-    <g fill="none" stroke="var(--crema)" stroke-width="6" stroke-linecap="round">
+    <g fill="none" stroke="var(--vino)" stroke-width="6" stroke-linecap="round">
       <path d="M78 172 C40 146 22 122 22 100 C22 82 34 70 50 70 C63 70 73 78 78 88 C83 78 93 70 106 70 C122 70 134 82 134 100 C134 122 116 146 78 172 Z"/>
       <path d="M222 172 C184 146 166 122 166 100 C166 82 178 70 194 70 C207 70 217 78 222 88 C227 78 237 70 250 70 C266 70 278 82 278 100 C278 122 260 146 222 172 Z"/>
       <path d="M134 108 C144 104 156 104 166 108"/>

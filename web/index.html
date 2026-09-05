@@ -13,7 +13,7 @@
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="es_AR">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23571E21'/%3E%3Ctext x='50' y='72' font-size='64' text-anchor='middle' fill='%23E4D8C2' font-family='Georgia,serif'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%2373302F'/%3E%3Ctext x='50' y='72' font-size='64' text-anchor='middle' fill='%23E4D8C2' font-family='Georgia,serif'%3EM%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Italianno&display=swap" rel="stylesheet">
@@ -22,16 +22,16 @@
    PALETA — tomada del arte de Andina Design Studio (MJ_Varios rev04)
    ============================================================ */
 :root{
-  --vino:#571E21;
-  --vino-claro:#6D2C35;
-  --bosque:#3C4A36;
+  --vino:#73302F;
+  --vino-claro:#8A3F42;
+  --bosque:#4A5A42;
   --salvia:#768462;
   --crema:#E4D8C2;
   --crema-suave:#F0E9DB;
   --papel:#F7F4EE;
   --papel-alto:#FFFFFF;
   --tinta:#2A2622;
-  --hairline:rgba(87,30,33,.28);
+  --hairline:rgba(115,48,47,.28);
 
   --display:'Italianno',cursive;
   --texto:'Cormorant Garamond',Georgia,serif;
@@ -149,13 +149,14 @@ a{color:inherit}
   display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
   gap:clamp(2.5rem,6vw,4rem);text-align:center;
 }
+.dato{display:flex;flex-direction:column}
+.dato__link{margin-top:auto;padding-top:clamp(1.4rem,3vw,2rem)}
 .dato h3{
   font-family:var(--texto);font-weight:500;font-size:.68rem;letter-spacing:.36em;
   text-transform:uppercase;margin:0 0 1.1rem;opacity:.7;
 }
 .dato p{margin:0;font-size:1.12rem;font-weight:300;line-height:1.6}
 .dato strong{display:block;font-family:var(--display);font-size:2.6rem;font-weight:400;line-height:1;margin-bottom:.35rem}
-.datos__cta{text-align:center;margin-top:clamp(3rem,7vw,4.5rem);display:flex;flex-wrap:wrap;gap:1.5rem 3rem;justify-content:center}
 .link-fino{
   display:inline-block;text-decoration:none;border-bottom:1px solid rgba(228,216,194,.5);
   padding-bottom:.4em;font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;
@@ -178,7 +179,7 @@ a{color:inherit}
   border-radius:clamp(120px,26vw,260px) clamp(120px,26vw,260px) 8px 8px;
   padding:clamp(3.5rem,9vw,6rem) clamp(1.6rem,6vw,5rem) clamp(2.8rem,6vw,4rem);
   max-width:760px;margin-inline:auto;box-shadow:0 30px 70px rgba(0,0,0,.22);
-  border:1px solid rgba(87,30,33,.18);
+  border:1px solid rgba(115,48,47,.18);
 }
 .rsvp__head{text-align:center;margin-bottom:clamp(2.5rem,6vw,3.5rem)}
 .rsvp__head h2{font-family:var(--display);font-size:clamp(3.2rem,9vw,5rem);color:var(--vino);margin:0 0 .8rem;font-weight:400;line-height:1}
@@ -213,6 +214,7 @@ a{color:inherit}
 .opciones--si-no label{min-width:140px;text-align:center;font-size:.88rem;padding:.8em 1.6em}
 
 .oculto{display:none}
+.req{color:var(--vino-claro);font-weight:400}
 .enviar{
   width:100%;margin-top:1rem;background:var(--vino);color:var(--crema);border:0;
   font-family:var(--texto);font-size:.72rem;letter-spacing:.32em;text-transform:uppercase;
@@ -245,6 +247,56 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.5;font-size:.6rem}
   .frase__mono .ink{opacity:1}
   html{scroll-behavior:auto}
 }
+
+/* ══════════════ REGALOS ══════════════ */
+.regalos{background:var(--papel);text-align:center}
+.regalos h2{font-family:var(--display);font-size:clamp(2.8rem,8vw,4.2rem);color:var(--vino);margin:0 0 1.2rem;font-weight:400;line-height:1}
+.regalos__intro{margin:0 auto;max-width:34rem;font-weight:300;font-size:1.05rem;line-height:1.7;color:rgba(42,38,34,.8)}
+.regalos__toggle{
+  margin-top:2.2rem;background:none;border:0;border-bottom:1px solid var(--hairline);
+  font-family:var(--texto);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--vino);padding:.55rem .2rem;cursor:pointer;transition:opacity .25s,border-color .25s}
+.regalos__toggle:hover{opacity:.65;border-color:var(--vino)}
+.regalos__datos{
+  margin-top:clamp(2.2rem,5vw,3rem);display:grid;gap:1.4rem;
+  grid-template-columns:repeat(auto-fit,minmax(min(100%,17rem),1fr));
+  max-width:44rem;margin-inline:auto;text-align:left}
+.regalo{background:var(--papel-alto);border:1px solid var(--hairline);border-radius:2px;padding:1.6rem 1.5rem}
+.regalo h3{margin:0 0 .25rem;font-size:.66rem;letter-spacing:.28em;text-transform:uppercase;color:var(--vino);font-weight:600}
+.regalo__banco{margin:0 0 1rem;font-size:.9rem;font-weight:300;color:rgba(42,38,34,.65)}
+.regalo__dato{
+  display:block;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:.86rem;letter-spacing:.02em;color:var(--tinta);overflow-wrap:break-word;line-height:1.6;margin-bottom:1rem}
+.regalo__titular{display:block;font-size:.78rem;font-weight:300;color:rgba(42,38,34,.6);margin:-.6rem 0 1rem}
+.regalo__copiar{
+  background:none;border:1px solid var(--hairline);border-radius:2px;
+  font-family:var(--texto);font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--vino);padding:.5rem .9rem;cursor:pointer;transition:background .25s,color .25s}
+.regalo__copiar:hover{background:var(--vino);color:var(--crema)}
+.regalo__copiar.ok{background:var(--salvia);border-color:var(--salvia);color:#fff}
+@media(prefers-reduced-motion:reduce){.regalos__toggle,.regalo__copiar{transition:none}}
+
+/* ══════════════ MODAL REGALOS ══════════════ */
+.modal{position:fixed;inset:0;z-index:900;display:flex;align-items:center;justify-content:center;padding:var(--gutter)}
+.modal[hidden]{display:none}
+.modal__fondo{position:absolute;inset:0;background:rgba(42,38,34,.62);backdrop-filter:blur(3px);animation:modalFade .28s ease}
+.modal__panel{
+  position:relative;background:var(--papel);border-radius:3px;
+  width:min(100%,46rem);max-height:calc(100dvh - var(--gutter)*2);overflow-y:auto;
+  padding:clamp(2.4rem,6vw,3.4rem) clamp(1.6rem,5vw,3rem);
+  box-shadow:0 24px 70px rgba(42,38,34,.35);animation:modalSube .34s cubic-bezier(.2,.8,.3,1)}
+.modal__x{
+  position:absolute;top:.7rem;right:.9rem;background:none;border:0;
+  font:300 2rem/1 var(--texto);color:var(--vino);cursor:pointer;
+  padding:.2em .4em;opacity:.55;transition:opacity .25s}
+.modal__x:hover{opacity:1}
+.modal__titulo{font-family:var(--display);font-size:clamp(2.6rem,7vw,3.6rem);color:var(--vino);margin:0 0 .5rem;font-weight:400;line-height:1;text-align:center}
+.modal__bajada{margin:0 auto clamp(1.8rem,4vw,2.4rem);max-width:26rem;text-align:center;font-weight:300;font-size:.95rem;line-height:1.6;color:rgba(42,38,34,.7)}
+.modal .regalos__datos{margin-top:0}
+.regalo__moneda{opacity:.55;letter-spacing:.12em}
+@keyframes modalFade{from{opacity:0}to{opacity:1}}
+@keyframes modalSube{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.modal__fondo,.modal__panel{animation:none}}
 </style>
 </head>
 <body>
@@ -295,10 +347,16 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.5;font-size:.6rem}
       <div class="dato reveal">
         <h3>Cuándo</h3>
         <p><strong>Sábado 28</strong>de noviembre de 2026<br>19:00 hs</p>
+        <div class="dato__link">
+          <a class="link-fino" href="evento.ics" download="casamiento-mica-y-juani.ics">Agendá la fecha</a>
+        </div>
       </div>
       <div class="dato reveal d1">
         <h3>Dónde</h3>
         <p><strong>La Posada</strong>Multiespacios<br>J. M. Loreto 4551, Benavídez</p>
+        <div class="dato__link">
+          <a class="link-fino" href="https://www.google.com/maps/search/?api=1&query=La+Posada+Multiespacios+J.+M.+Loreto+4551+Benavidez" target="_blank" rel="noopener">Cómo llegar</a>
+        </div>
       </div>
       <!-- ✎ EDITAR: cambiá el dress code si va otra cosa -->
       <div class="dato reveal d2">
@@ -313,10 +371,6 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.5;font-size:.6rem}
       <div><b id="c-min">—</b><span>minutos</span></div>
     </div>
 
-    <div class="datos__cta reveal d3">
-      <a class="link-fino" href="https://www.google.com/maps/search/?api=1&query=La+Posada+Multiespacios+J.+M.+Loreto+4551+Benavidez" target="_blank" rel="noopener">Cómo llegar</a>
-      <a class="link-fino" href="evento.ics" download="casamiento-mica-y-juani.ics">Agendá la fecha</a>
-    </div>
   </div>
 </section>
 
@@ -326,7 +380,6 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.5;font-size:.6rem}
     <div class="rsvp__card">
       <div class="rsvp__head">
         <h2>Confirmá tu lugar</h2>
-        <p>Contanos si venís así organizamos todo. Te lleva un minuto.</p>
       </div>
 
       <form id="form" novalidate>
@@ -336,7 +389,7 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.5;font-size:.6rem}
         </div>
 
         <div class="campo">
-          <label for="contacto">WhatsApp o mail</label>
+          <label for="contacto">WhatsApp</label>
           <input type="text" id="contacto" name="contacto" placeholder="Para avisarte cualquier cambio" required>
         </div>
 
@@ -352,87 +405,34 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.5;font-size:.6rem}
 
         <div id="bloque-si" class="oculto">
           <div class="campo">
-            <label for="cuantos">¿Cuántos van en total, contándote?</label>
-            <input type="number" id="cuantos" name="cuantos" min="1" max="12" step="1"
-                   inputmode="numeric" placeholder="1">
-            <p class="ayuda">Si estás invitado con alguien más, contalo acá. Si venís solo, poné 1.</p>
-          </div>
-
-          <div class="campo">
-            <span class="grupo__titulo" id="lbl-dieta">¿Comés de todo?</span>
+            <span class="grupo__titulo" id="lbl-dieta">¿Tenés alguna alergia o restricción alimentaria? <span class="req">*</span></span>
             <div class="opciones" role="group" aria-labelledby="lbl-dieta">
-              <input type="checkbox" id="d0" name="dieta" value="Como de todo"><label for="d0">Como de todo</label>
+              <input type="checkbox" id="d0" name="dieta" value="Ninguna"><label for="d0">Ninguna</label>
               <input type="checkbox" id="d1" name="dieta" value="Vegetariano/a"><label for="d1">Vegetariano/a</label>
               <input type="checkbox" id="d2" name="dieta" value="Vegano/a"><label for="d2">Vegano/a</label>
-              <input type="checkbox" id="d3" name="dieta" value="Sin TACC (celíaco/a)"><label for="d3">Sin TACC</label>
-              <input type="checkbox" id="d4" name="dieta" value="Sin lactosa"><label for="d4">Sin lactosa</label>
-              <input type="checkbox" id="d5" name="dieta" value="Sin carne roja"><label for="d5">Sin carne roja</label>
-              <input type="checkbox" id="d6" name="dieta" value="Sin cerdo"><label for="d6">Sin cerdo</label>
-              <input type="checkbox" id="d7" name="dieta" value="Sin pescado ni mariscos"><label for="d7">Sin pescado ni mariscos</label>
-              <input type="checkbox" id="d8" name="dieta" value="Alergia"><label for="d8">Tengo una alergia</label>
-              <input type="checkbox" id="d9" name="dieta" value="Otra"><label for="d9">Otra</label>
+              <input type="checkbox" id="d3" name="dieta" value="Celíaco/a"><label for="d3">Celíaco/a</label>
+              <input type="checkbox" id="d4" name="dieta" value="Otra"><label for="d4">Otra (especificar a continuación)</label>
             </div>
           </div>
 
           <div class="campo oculto" id="campo-detalle">
-            <label for="detalle">Contanos exactamente qué no podés comer</label>
+            <label for="detalle">Contanos cuál</label>
             <input type="text" id="detalle" name="detalle" placeholder="Frutos secos, mariscos, huevo…">
-            <p class="ayuda">Cuanto más preciso, mejor lo resuelve la cocina.</p>
-          </div>
-
-          <div class="campo oculto" id="campo-severa">
-            <span class="grupo__titulo" id="lbl-severa">¿Es una alergia severa?</span>
-            <div class="opciones" role="radiogroup" aria-labelledby="lbl-severa">
-              <input type="radio" id="s-si" name="severa" value="Sí, ni trazas ni contacto"><label for="s-si">Sí, ni trazas ni contacto</label>
-              <input type="radio" id="s-no" name="severa" value="No, es intolerancia o preferencia"><label for="s-no">No, es intolerancia</label>
-            </div>
-            <p class="ayuda">Si es severa avisamos a cocina para que tu plato se prepare aparte.</p>
-          </div>
-
-          <div class="campo oculto" id="campo-acomp-dieta">
-            <label for="dieta-acomp">¿Y los que vienen con vos?</label>
-            <textarea id="dieta-acomp" name="dietaAcomp" placeholder="Ej: Sofía es vegetariana; Tomás no come gluten"></textarea>
-            <p class="ayuda">Poné el nombre de cada uno con su restricción, así no las mezclamos.</p>
-          </div>
-
-          <div class="campo">
-            <span class="grupo__titulo" id="lbl-menores">¿Venís con chicos?</span>
-            <div class="opciones" role="radiogroup" aria-labelledby="lbl-menores">
-              <input type="radio" id="m-no" name="menores" value="No"><label for="m-no">No</label>
-              <input type="radio" id="m-si" name="menores" value="Sí"><label for="m-si">Sí</label>
-            </div>
-          </div>
-
-          <div class="campo oculto" id="campo-menores">
-            <label for="menores-detalle">¿Cuántos y de qué edad?</label>
-            <input type="text" id="menores-detalle" name="menoresDetalle" placeholder="Ej: 2 chicos, de 4 y 9 años">
-            <p class="ayuda">Es para el menú infantil y para calcular las sillas.</p>
-          </div>
-
-          <div class="campo">
-            <label for="accesibilidad">¿Algo que debamos tener en cuenta para que la pases bien?</label>
-            <input type="text" id="accesibilidad" name="accesibilidad" placeholder="Movilidad reducida, embarazo, medicación, lo que sea">
-            <p class="ayuda">Opcional. Nos sirve para ubicarte cómodo y resolverlo sin que tengas que pedirlo esa noche.</p>
+            <p class="ayuda">Cuanto más preciso, mejor lo resuelve la cocina. Si es una alergia severa, aclaranoslo acá y avisamos para que tu plato se prepare aparte.</p>
           </div>
 
           <div class="campo">
             <label for="cancion">Una canción que no puede faltar</label>
-            <input type="text" id="cancion" name="cancion" placeholder="La que te saca a bailar sí o sí">
-          </div>
-
-          <!-- ✎ PENDIENTE: la pregunta disruptiva. Cambiar label y placeholder. -->
-          <div class="campo" id="campo-extra">
-            <label for="extra">PREGUNTA PENDIENTE DE DEFINIR</label>
-            <input type="text" id="extra" name="extra" placeholder="">
+            <input type="text" id="cancion" name="cancion" placeholder="La que te encanta">
           </div>
         </div>
 
         <div class="campo">
           <label for="mensaje">Dejanos un mensaje</label>
-          <textarea id="mensaje" name="mensaje" placeholder="Opcional, pero se agradece"></textarea>
+          <textarea id="mensaje" name="mensaje" placeholder="Opcional"></textarea>
         </div>
 
-        <button class="enviar" type="submit" id="btn">Enviar confirmación</button>
+        <button class="enviar" type="submit" id="btn">Enviar</button>
         <p class="error" id="error" role="status" aria-live="polite"></p>
       </form>
 
@@ -451,7 +451,50 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.5;font-size:.6rem}
   </div>
 </section>
 
+
+<!-- ══════════════ REGALOS ══════════════ -->
+<section class="regalos" id="regalos">
+  <div class="wrap">
+    <h2 class="reveal">Regalos</h2>
+    <p class="regalos__intro reveal d1">
+      Lo más importante para nosotros es que estés ese día. Si además tenés ganas
+      de hacernos un regalo, te dejamos los datos acá.
+    </p>
+    <button class="regalos__toggle reveal d1" type="button"
+            id="btn-regalos" aria-haspopup="dialog">
+      Ver los datos
+    </button>
+  </div>
+</section>
+
 </main>
+
+<!-- ══════════════ REGALOS: pantalla de datos ══════════════ -->
+<div class="modal" id="modal-regalos" hidden role="dialog" aria-modal="true" aria-labelledby="modal-titulo">
+  <div class="modal__fondo" data-cerrar></div>
+  <div class="modal__panel" role="document">
+    <button class="modal__x" type="button" id="cerrar-regalos" aria-label="Cerrar">&times;</button>
+    <h3 class="modal__titulo" id="modal-titulo">Regalos</h3>
+    <p class="modal__bajada">Gracias por el gesto. Cualquiera de las dos opciones nos llega igual.</p>
+
+    <div class="regalos__datos">
+      <div class="regalo">
+        <h3>Desde Argentina <span class="regalo__moneda">(ARS)</span></h3>
+        <p class="regalo__banco">Mercado Pago</p>
+        <span class="regalo__dato" id="dato-mp">micalezicayjuani</span>
+        <button class="regalo__copiar" type="button" data-copiar="dato-mp">Copiar alias</button>
+      </div>
+      <div class="regalo">
+        <h3>Desde Europa <span class="regalo__moneda">(EUR)</span></h3>
+        <p class="regalo__banco">Banco Santander · España</p>
+        <span class="regalo__dato" id="dato-iban">ES79 0049 1755 7222 1002 9495</span>
+        <span class="regalo__titular">Titular: Juan Ignacio Francisco</span>
+        <button class="regalo__copiar" type="button" data-copiar="dato-iban">Copiar IBAN</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <footer>
   <svg class="mono-mini" viewBox="0 0 300 200" aria-hidden="true">
@@ -523,39 +566,16 @@ document.querySelectorAll('input[name=asiste]').forEach(r=>{
   });
 });
 
-const campoSevera=document.getElementById('campo-severa');
-const campoAcompDieta=document.getElementById('campo-acomp-dieta');
-const campoMenores=document.getElementById('campo-menores');
 const dietas=[...document.querySelectorAll('input[name=dieta]')];
 
 dietas.forEach(c=>{
   c.addEventListener('change',()=>{
-    // "Como de todo" es excluyente
-    if(c.value==='Como de todo' && c.checked){dietas.forEach(o=>{if(o!==c)o.checked=false;});}
-    else if(c.checked){const n=dietas.find(o=>o.value==='Como de todo'); if(n)n.checked=false;}
-    const alergia = dietas.some(o=>o.checked && o.value==='Alergia');
-    const pideDetalle = dietas.some(o=>o.checked && (o.value==='Alergia'||o.value==='Otra'));
+    // "Ninguna" es excluyente
+    if(c.value==='Ninguna' && c.checked){dietas.forEach(o=>{if(o!==c)o.checked=false;});}
+    else if(c.checked){const n=dietas.find(o=>o.value==='Ninguna'); if(n)n.checked=false;}
+    const pideDetalle = dietas.some(o=>o.checked && o.value==='Otra');
     campoDetalle.classList.toggle('oculto', !pideDetalle);
-    campoSevera.classList.toggle('oculto', !alergia);
     if(!pideDetalle) document.getElementById('detalle').value='';
-    if(!alergia) document.querySelectorAll('input[name=severa]').forEach(x=>x.checked=false);
-  });
-});
-
-// las restricciones de los acompañantes solo se preguntan si hay acompañantes
-// las restricciones de los demas solo se preguntan si viene mas de uno
-document.getElementById('cuantos').addEventListener('input',e=>{
-  const n = parseInt(e.target.value,10);
-  const varios = Number.isFinite(n) && n > 1;
-  campoAcompDieta.classList.toggle('oculto', !varios);
-  if(!varios) document.getElementById('dieta-acomp').value='';
-});
-
-document.querySelectorAll('input[name=menores]').forEach(r=>{
-  r.addEventListener('change',()=>{
-    const con = r.value==='Sí';
-    campoMenores.classList.toggle('oculto', !con);
-    if(!con) document.getElementById('menores-detalle').value='';
   });
 });
 
@@ -567,38 +587,29 @@ form.addEventListener('submit',async e=>{
   const asisteEl=document.querySelector('input[name=asiste]:checked');
 
   if(!val('nombre')){errorBox.textContent='Nos falta tu nombre.';document.getElementById('nombre').focus();return;}
-  if(!val('contacto')){errorBox.textContent='Dejanos un WhatsApp o un mail para poder avisarte cosas.';document.getElementById('contacto').focus();return;}
+  if(!val('contacto')){errorBox.textContent='Dejanos un WhatsApp para poder avisarte cosas.';document.getElementById('contacto').focus();return;}
   if(!asisteEl){errorBox.textContent='Contanos si venís o no.';return;}
   if(asisteEl.value==='Sí'){
-    const n = parseInt(val('cuantos'),10);
-    if(!Number.isFinite(n) || n < 1 || n > 12){
-      errorBox.textContent='Decinos cuántos van en total, contándote (un número del 1 al 12).';
-      document.getElementById('cuantos').focus();return;
-    }
     if(!dietas.some(c=>c.checked)){
-      errorBox.textContent='Marcá al menos una opción de comida (si comés de todo, marcá esa).';
+      errorBox.textContent='Marcá al menos una opción. Si no tenés ninguna restricción, marcá "Ninguna".';
       document.getElementById('d0').focus();return;
+    }
+    if(dietas.some(c=>c.checked && c.value==='Otra') && !val('detalle')){
+      errorBox.textContent='Contanos cuál es la restricción.';
+      document.getElementById('detalle').focus();return;
     }
   }
 
   const viene = asisteEl.value==='Sí';
-  const marcado=n=>{const el=document.querySelector('input[name='+n+']:checked');return el?el.value:'';};
   const solo=v=>viene?v:'';
   const datos={
     fecha:new Date().toLocaleString('es-AR',{timeZone:'America/Argentina/Buenos_Aires',hour12:false,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}),
     nombre:val('nombre'),
     contacto:val('contacto'),
     asiste:asisteEl.value,
-    cuantos:solo(val('cuantos')),
     dieta:solo(dietas.filter(c=>c.checked).map(c=>c.value).join(', ')),
     detalle:solo(val('detalle')),
-    severa:solo(marcado('severa')),
-    dietaAcomp:solo(val('dieta-acomp')),
-    menores:solo(marcado('menores')),
-    menoresDetalle:solo(val('menores-detalle')),
-    accesibilidad:solo(val('accesibilidad')),
     cancion:solo(val('cancion')),
-    extra:val('extra'),
     mensaje:val('mensaje')
   };
 
@@ -618,7 +629,7 @@ form.addEventListener('submit',async e=>{
   }catch(err){
     console.error(err);
     errorBox.textContent='No pudimos enviarlo. Probá de nuevo o escribinos por WhatsApp.';
-    btn.disabled=false; btn.textContent='Enviar confirmación';
+    btn.disabled=false; btn.textContent='Enviar';
   }
 });
 
@@ -638,6 +649,83 @@ async function guardar(datos){
   throw new Error('ENDPOINT vacio: la confirmacion no se guardo en ningun lado');
 }
 
+
+/* ---------- regalos: desplegar y copiar ---------- */
+(function(){
+  const abrir=document.getElementById('btn-regalos');
+  const modal=document.getElementById('modal-regalos');
+  const cerrarBtn=document.getElementById('cerrar-regalos');
+  if(!abrir||!modal||!cerrarBtn) return;
+  let ultimoFoco=null;
+
+  function abrirModal(){
+    ultimoFoco=document.activeElement;
+    modal.hidden=false;
+    document.body.style.overflow='hidden';
+    cerrarBtn.focus();
+  }
+  function cerrarModal(){
+    modal.hidden=true;
+    document.body.style.overflow='';
+    if(ultimoFoco && ultimoFoco.focus) ultimoFoco.focus();
+  }
+  abrir.addEventListener('click',abrirModal);
+  cerrarBtn.addEventListener('click',cerrarModal);
+  modal.querySelectorAll('[data-cerrar]').forEach(el=>el.addEventListener('click',cerrarModal));
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape' && !modal.hidden) cerrarModal(); });
+
+  // el foco no debe escaparse del modal mientras esta abierto
+  modal.addEventListener('keydown',e=>{
+    if(e.key!=='Tab') return;
+    const f=[...modal.querySelectorAll('button,[href],input,[tabindex]:not([tabindex="-1"])')].filter(el=>el.offsetParent!==null);
+    if(!f.length) return;
+    const primero=f[0], ultimo=f[f.length-1];
+    if(e.shiftKey && document.activeElement===primero){e.preventDefault();ultimo.focus();}
+    else if(!e.shiftKey && document.activeElement===ultimo){e.preventDefault();primero.focus();}
+  });
+
+  // el clipboard puede quedar colgado esperando permiso: le ponemos limite
+  const conTimeout=(prom,ms)=>Promise.race([
+    prom, new Promise((_,rej)=>setTimeout(()=>rej(new Error('timeout')),ms))
+  ]);
+
+  document.querySelectorAll('.regalo__copiar').forEach(b=>{
+    b.addEventListener('click',async()=>{
+      const el=document.getElementById(b.dataset.copiar);
+      if(!el) return;
+      const txt=el.textContent.trim();
+      if(!b.dataset.txt) b.dataset.txt=b.textContent.trim();
+      const original=b.dataset.txt;
+      let ok=false;
+      try{
+        if(navigator.clipboard && window.isSecureContext){
+          await conTimeout(navigator.clipboard.writeText(txt),1200);
+          ok=true;
+        }else{ throw new Error('sin api'); }
+      }catch(e){
+        try{
+          const ta=document.createElement('textarea');
+          ta.value=txt; ta.setAttribute('readonly','');
+          ta.style.cssText='position:absolute;left:-9999px';
+          document.body.appendChild(ta); ta.select();
+          ok=document.execCommand('copy');
+          document.body.removeChild(ta);
+        }catch(e2){ ok=false; }
+      }
+      if(!ok){
+        // ultimo recurso: dejar el dato seleccionado para copiar a mano
+        try{
+          const r=document.createRange(); r.selectNodeContents(el);
+          const s=getSelection(); s.removeAllRanges(); s.addRange(r);
+        }catch(e3){}
+      }
+      b.textContent = ok ? '¡Copiado!' : 'Copialo de arriba';
+      b.classList.toggle('ok',ok);
+      clearTimeout(b.__t);
+      b.__t=setTimeout(()=>{b.textContent=original;b.classList.remove('ok');},2400);
+    });
+  });
+})();
 </script>
 </body>
 </html>

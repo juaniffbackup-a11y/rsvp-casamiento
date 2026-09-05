@@ -21,6 +21,17 @@ function doPost(e) {
   // espero 27,8 s. Con 30000 estabamos a dos segundos de que empezara a
   // fallar. 60 s da margen para un pico mayor sin acercarse al limite de
   // 6 minutos por ejecucion que impone Apps Script.
+  // Si esto se ejecuta desde el editor no hay request y "e" llega vacio.
+  // Sin este aviso el error es "Cannot read properties of undefined", que no
+  // dice nada. Las funciones que se corren a mano son reiniciarRespuestas y
+  // armarResumen: hay que elegirlas en el desplegable de arriba.
+  if (!e || !e.postData) {
+    const msg = 'doPost la llama la web, no se ejecuta a mano. ' +
+                'Eligi "reiniciarRespuestas" o "armarResumen" en el desplegable.';
+    console.log(msg);
+    return ContentService.createTextOutput(msg);
+  }
+
   const lock = LockService.getScriptLock();
   lock.waitLock(60000);
   try {

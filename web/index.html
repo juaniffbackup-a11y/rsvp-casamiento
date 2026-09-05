@@ -296,6 +296,9 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.85;font-size:1.05rem}
 .modal__bajada{margin:0 auto clamp(1.8rem,4vw,2.4rem);max-width:26rem;text-align:center;font-weight:300;font-size:.95rem;line-height:1.6;color:rgba(42,38,34,.7)}
 .modal .regalos__datos{margin-top:0}
 .regalo__moneda{opacity:.55;letter-spacing:.12em}
+.regalo--pendiente{background:transparent;border-style:dashed;opacity:.8}
+.regalo--pendiente h3,.regalo--pendiente .regalo__banco{opacity:.75}
+.regalo__aviso{display:block;font-size:.86rem;font-weight:300;font-style:italic;color:rgba(42,38,34,.62);line-height:1.55}
 @keyframes modalFade{from{opacity:0}to{opacity:1}}
 @keyframes modalSube{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.modal__fondo,.modal__panel{animation:none}}
@@ -484,7 +487,7 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.85;font-size:1.05rem}
   <div class="modal__panel" role="document">
     <button class="modal__x" type="button" id="cerrar-regalos" aria-label="Cerrar">&times;</button>
     <h3 class="modal__titulo" id="modal-titulo">Regalos</h3>
-    <p class="modal__bajada">Gracias por el gesto. Cualquiera de las dos opciones nos llega igual.</p>
+    <p class="modal__bajada">Gracias por el gesto. Cualquiera de estas opciones nos llega igual.</p>
 
     <div class="regalos__datos">
       <div class="regalo">
@@ -499,6 +502,11 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.85;font-size:1.05rem}
         <span class="regalo__dato" id="dato-iban">ES79 0049 1755 7222 1002 9495</span>
         <span class="regalo__titular">Titular: Juan Ignacio Francisco</span>
         <button class="regalo__copiar" type="button" data-copiar="dato-iban">Copiar IBAN</button>
+      </div>
+      <div class="regalo regalo--pendiente">
+        <h3>Desde Argentina <span class="regalo__moneda">(USD)</span></h3>
+        <p class="regalo__banco">Cuenta en dólares</p>
+        <span class="regalo__aviso">Todavía la estamos abriendo. Si preferís esta opción, escribinos y te pasamos los datos.</span>
       </div>
     </div>
   </div>

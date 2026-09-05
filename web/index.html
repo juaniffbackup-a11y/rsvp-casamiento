@@ -82,11 +82,6 @@ a{color:inherit}
   display:grid;place-items:center;text-align:center;
   padding:clamp(3rem,8vw,6rem) var(--gutter);position:relative;overflow:hidden;
 }
-.hero::after{ /* halo cálido, como la tinta sobre papel */
-  content:"";position:absolute;inset:0;
-  background:radial-gradient(120% 90% at 50% 40%,rgba(255,255,255,.55),transparent 62%);
-  pointer-events:none;
-}
 .hero__inner{position:relative;z-index:2}
 .hero__fecha{
   font-size:clamp(.86rem,1.9vw,1.06rem);letter-spacing:.52em;text-transform:uppercase;
@@ -152,14 +147,14 @@ a{color:inherit}
 .dato{display:flex;flex-direction:column}
 .dato__link{margin-top:.85rem}
 .dato h3{
-  font-family:var(--texto);font-weight:500;font-size:1.02rem;letter-spacing:.36em;
+  font-family:var(--texto);font-weight:500;font-size:.765rem;letter-spacing:.36em;
   text-transform:uppercase;margin:0 0 1.1rem;color:var(--bosque);
 }
-.dato p{margin:0;font-size:1.68rem;font-weight:300;line-height:1.6}
-.dato strong{display:block;font-family:var(--display);font-size:3.9rem;font-weight:400;line-height:1;margin-bottom:.35rem}
+.dato p{margin:0;font-size:1.26rem;font-weight:300;line-height:1.6}
+.dato strong{display:block;font-family:var(--display);font-size:2.925rem;font-weight:400;line-height:1;margin-bottom:.35rem}
 .link-fino{
   display:inline-block;text-decoration:none;border-bottom:1px solid rgba(115,48,47,.42);
-  padding-bottom:.4em;font-size:1.02rem;letter-spacing:.3em;text-transform:uppercase;
+  padding-bottom:.4em;font-size:.765rem;letter-spacing:.3em;text-transform:uppercase;
   transition:border-color .3s,opacity .3s;
 }
 .link-fino:hover{border-color:var(--vino);opacity:.68}
@@ -227,6 +222,12 @@ a{color:inherit}
 .gracias{text-align:center;padding-block:1rem}
 .gracias h3{font-family:var(--display);font-size:clamp(3rem,8vw,4.4rem);color:var(--vino);margin:0 0 1rem;font-weight:400;line-height:1}
 .gracias p{margin:0 auto;max-width:34ch;font-weight:300}
+.otra{
+  margin-top:1.8rem;background:none;border:1px solid var(--hairline);border-radius:2px;
+  font-family:var(--texto);font-size:.72rem;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--vino);padding:1em 2.2em;cursor:pointer;transition:background .3s,color .3s,border-color .3s}
+.otra:hover{background:var(--vino);color:var(--crema);border-color:var(--vino)}
+.gracias__ayuda{margin:.9rem 0 0;font-size:.85rem;font-style:italic;font-weight:300;color:rgba(42,38,34,.55)}
 .gracias .mono-mini{width:110px;margin:2.2rem auto 0;opacity:.75}
 
 /* ============================================================
@@ -438,12 +439,16 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.85;font-size:1.05rem}
       <div class="gracias oculto" id="gracias">
         <h3 id="gracias-titulo">¡Gracias!</h3>
         <p id="gracias-texto"></p>
+        <button class="otra" type="button" id="btn-otra">Cargar otra confirmación</button>
+        <p class="gracias__ayuda">Si venís con alguien más, cargá su confirmación acá.</p>
         <svg class="mono-mini" viewBox="0 0 300 200" aria-hidden="true">
           <g fill="none" stroke="var(--vino)" stroke-width="6" stroke-linecap="round">
             <path d="M78 172 C40 146 22 122 22 100 C22 82 34 70 50 70 C63 70 73 78 78 88 C83 78 93 70 106 70 C122 70 134 82 134 100 C134 122 116 146 78 172 Z"/>
             <path d="M222 172 C184 146 166 122 166 100 C166 82 178 70 194 70 C207 70 217 78 222 88 C227 78 237 70 250 70 C266 70 278 82 278 100 C278 122 260 146 222 172 Z"/>
             <path d="M134 108 C144 104 156 104 166 108"/>
           </g>
+          <text x="78" y="126" text-anchor="middle" fill="var(--vino)" stroke="none" font-family="Italianno, cursive" font-size="58">M</text>
+          <text x="222" y="126" text-anchor="middle" fill="var(--vino)" stroke="none" font-family="Italianno, cursive" font-size="58">J</text>
         </svg>
       </div>
     </div>
@@ -503,6 +508,8 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.85;font-size:1.05rem}
       <path d="M222 172 C184 146 166 122 166 100 C166 82 178 70 194 70 C207 70 217 78 222 88 C227 78 237 70 250 70 C266 70 278 82 278 100 C278 122 260 146 222 172 Z"/>
       <path d="M134 108 C144 104 156 104 166 108"/>
     </g>
+    <text x="78" y="126" text-anchor="middle" fill="var(--vino)" stroke="none" font-family="Italianno, cursive" font-size="58">M</text>
+    <text x="222" y="126" text-anchor="middle" fill="var(--vino)" stroke="none" font-family="Italianno, cursive" font-size="58">J</text>
   </svg>
   <p>Mica &amp; Juani · 28.11.26</p>
   <p class="f2">La Posada Multiespacios · Benavídez</p>
@@ -647,6 +654,7 @@ form.addEventListener('submit',async e=>{
     await guardar(datos);
     errorBox.textContent='';
     form.classList.add('oculto');
+    document.querySelector('.rsvp__head').classList.add('oculto');
     const g=document.getElementById('gracias');
     document.getElementById('gracias-titulo').textContent = viene ? '¡Nos vemos!' : 'Gracias igual';
     document.getElementById('gracias-texto').textContent = viene
@@ -659,6 +667,22 @@ form.addEventListener('submit',async e=>{
     errorBox.textContent='No pudimos enviarlo. Probá de nuevo o escribinos por WhatsApp.';
     btn.disabled=false; btn.textContent='Enviar';
   }
+});
+
+/* ---------- cargar otra confirmacion (los que vienen de a dos) ---------- */
+document.getElementById('btn-otra').addEventListener('click',()=>{
+  form.reset();
+  // form.reset() limpia los valores pero no el estado de los bloques condicionales
+  bloqueSi.classList.add('oculto');
+  campoDetalle.classList.add('oculto');
+  errorBox.textContent='';
+  btn.disabled=false;
+  btn.textContent='Enviar';
+  document.getElementById('gracias').classList.add('oculto');
+  document.querySelector('.rsvp__head').classList.remove('oculto');
+  form.classList.remove('oculto');
+  document.getElementById('confirmar').scrollIntoView({behavior:'smooth',block:'start'});
+  document.getElementById('nombre').focus({preventScroll:true});
 });
 
 async function guardar(datos){

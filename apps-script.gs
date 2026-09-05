@@ -1,13 +1,17 @@
 /**
  * Recibe las confirmaciones de la web y las escribe en la planilla.
- * Pegar en Extensiones > Apps Script de un Google Sheet nuevo.
+ * Pegar en Extensiones > Apps Script de la planilla.
+ *
+ * ACTUALIZADO 05/09/2026: la web se simplifico y quedaron siete columnas
+ * huerfanas (cuantos, severa, dietaAcomp, menores, menoresDetalle,
+ * accesibilidad, extra). Se sacan. Ahora se pide UN FORMULARIO POR PERSONA,
+ * asi que los cubiertos son la cantidad de confirmaciones, no una suma.
  */
 
 const HOJA = 'Respuestas';
 
-const COLUMNAS = ['fecha','nombre','contacto','asiste','cuantos','dieta',
-                  'detalle','severa','dietaAcomp','menores','menoresDetalle',
-                  'accesibilidad','cancion','extra','mensaje'];
+const COLUMNAS = ['fecha','nombre','contacto','asiste','dieta',
+                  'detalle','cancion','mensaje'];
 
 function doPost(e) {
   // Sin lock, dos invitados que confirman en el mismo segundo se pisan la fila.
@@ -20,6 +24,22 @@ function doPost(e) {
   const lock = LockService.getScriptLock();
   lock.waitLock(60000);
   try {
+    const d = JSON.parse(e.postData.contents);
+
+    // Trampa para bots. El campo esta fuera de pantalla y sin tabulacion: una
+    // persona no lo ve. Si viene con algo, es un bot.
+    //
+    // Se responde ok a proposito. Si devolvieramos error, el bot reintentaria;
+    // creyendo que funciono, se va. El 29/08/2026 entro uno que marco las nueve
+    // opciones de dieta, puso 6 cubiertos y repitio un pitch comercial en cada
+    // campo de texto. Los 6 cubiertos falsos rompieron el total del resumen.
+    if (String(d.trampa || '').trim() !== '') {
+      console.warn('Descartado por la trampa anti-bot: ' + JSON.stringify(d).slice(0, 300));
+      return ContentService
+        .createTextOutput(JSON.stringify({ ok: true }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+
     const libro = SpreadsheetApp.getActiveSpreadsheet();
     let hoja = libro.getSheetByName(HOJA);
     if (!hoja) hoja = libro.insertSheet(HOJA);
@@ -28,7 +48,6 @@ function doPost(e) {
       hoja.getRange(1, 1, 1, COLUMNAS.length).setFontWeight('bold');
       hoja.setFrozenRows(1);
     }
-    const d = JSON.parse(e.postData.contents);
     hoja.appendRow(COLUMNAS.map(c => d[c] || ''));
     return ContentService
       .createTextOutput(JSON.stringify({ ok: true }))
@@ -68,9 +87,36 @@ function doGet() {
   }
 }
 
+/**
+ * Deja la hoja de Respuestas con las columnas nuevas. Correr UNA VEZ.
+ *
+ * Las filas viejas tienen quince columnas y las nuevas ocho: si se mezclan,
+ * los datos quedan corridos y ninguna formula del Resumen sirve. Como todo
+ * lo cargado hasta hoy son pruebas mas el spam del 29/08, se borra entero.
+ * Antes de borrar se guarda una copia en una hoja aparte, por las dudas.
+ */
+function reiniciarRespuestas() {
+  const libro = SpreadsheetApp.getActiveSpreadsheet();
+  const hoja = libro.getSheetByName(HOJA);
+
+  if (hoja && hoja.getLastRow() > 0) {
+    const respaldo = 'Respaldo ' + Utilities.formatDate(new Date(), 'GMT-3', 'dd-MM HH.mm');
+    hoja.copyTo(libro).setName(respaldo);
+    console.log('Copia guardada en la hoja "' + respaldo + '"');
+    libro.deleteSheet(hoja);
+  }
+
+  const nueva = libro.insertSheet(HOJA);
+  nueva.appendRow(COLUMNAS);
+  nueva.getRange(1, 1, 1, COLUMNAS.length).setFontWeight('bold');
+  nueva.setFrozenRows(1);
+  nueva.setColumnWidth(1, 150);
+  nueva.setColumnWidth(2, 180);
+  console.log('Hoja "' + HOJA + '" reiniciada con ' + COLUMNAS.length + ' columnas: ' + COLUMNAS.join(', '));
+}
 
 /**
- * Arma la pestaña "Resumen". Correr UNA VEZ desde el editor.
+ * Arma la pestaña "Resumen". Correr DESPUES de reiniciarRespuestas().
  *
  * EL PROBLEMA DEL SEPARADOR (26/08/2026, dos intentos fallidos):
  * en una planilla en español el separador de argumentos es ';' y no ','.
@@ -88,10 +134,10 @@ function armarResumen() {
   if (h) libro.deleteSheet(h);
   h = libro.insertSheet('Resumen', 0);
 
+  // A=fecha B=nombre C=contacto D=asiste E=dieta F=detalle G=cancion H=mensaje
   const R = "'" + HOJA + "'";
-  const B = R + '!B2:B', D = R + '!D2:D', E = R + '!E2:E';
-  const F = R + '!F2:F', G = R + '!G2:G', H = R + '!H2:H';
-  const I = R + '!I2:I', K = R + '!K2:K', A = R + '!A2:A';
+  const A = R + '!A2:A', B = R + '!B2:B', C_ = R + '!C2:C', D = R + '!D2:D';
+  const E = R + '!E2:E', F = R + '!F2:F', G = R + '!G2:G', H = R + '!H2:H';
 
   const textos = [
     ['CONFIRMACIONES'], ['Mica & Juani · 28 de noviembre de 2026'], [''],
@@ -99,17 +145,17 @@ function armarResumen() {
     ['Respuestas recibidas'], ['Confirmaron que vienen'], ['Dijeron que no'],
     ['Última respuesta'], [''],
     ['REVISAR'], ['Nombres repetidos'], [''], [''],
-    ['ALERGIAS SEVERAS'], [''], [''], [''],
-    ['OTRAS RESTRICCIONES'], [''], [''],
-    ['DE LOS ACOMPAÑANTES'], [''], [''],
-    ['VIENEN CON CHICOS'], ['']
+    ['RESTRICCIONES PARA LA COCINA'], [''], [''], [''],
+    ['CANCIONES PEDIDAS'], [''], [''],
+    ['MENSAJES'], ['']
   ];
   h.getRange(1, 1, textos.length, 1).setValues(textos);
-  h.getRange('B13').setValue('Si aparece alguien acá, mandó el formulario dos veces y sus cubiertos se están contando doble.');
-  h.getRange('B17').setValue('Estas van SEPARADAS al salón. No son preferencias: son riesgo médico.');
+  h.getRange('B13').setValue('Cada persona manda su propio formulario. Si alguien aparece dos veces acá, está contado doble.');
+  h.getRange('B17').setValue('Solo los que NO marcaron "Ninguna". Lo que dice "Otra" viene detallado al lado.');
 
   const f = {
-    'B4':  `=SUMIF(${D}${C}"Sí"${C}${E})`,
+    // un formulario por persona: los cubiertos son las confirmaciones, no una suma
+    'B4':  `=COUNTIF(${D}${C}"Sí")`,
     'B6':  `=COUNTA(${B})`,
     'B7':  `=COUNTIF(${D}${C}"Sí")`,
     'B8':  `=COUNTIF(${D}${C}"No")`,
@@ -118,11 +164,9 @@ function armarResumen() {
     // que hay que preguntar ANTES si hay filas.
     'B9':  `=IF(COUNTA(${A})=0${C}"todavía ninguna"${C}INDEX(${A}${C}COUNTA(${A})))`,
     'B12': `=IFERROR(IF(COUNTA(${B})=0${C}"—"${C}TEXTJOIN(", "${C}TRUE${C}FILTER(UNIQUE(${B})${C}COUNTIF(${B}${C}UNIQUE(${B}))>1)))${C}"ninguno")`,
-    'B15': `=COUNTIF(${H}${C}"Sí*")`,
-    'B16': `=IFERROR(TEXTJOIN(CHAR(10)${C}TRUE${C}FILTER(${B}&" — "&${G}${C}LEFT(${H}${C}2)="Sí"))${C}"ninguna")`,
-    'B20': `=IFERROR(TEXTJOIN(CHAR(10)${C}TRUE${C}FILTER(${B}&" — "&${F}${C}${F}<>""${C}${F}<>"Como de todo"))${C}"ninguna")`,
-    'B23': `=IFERROR(TEXTJOIN(CHAR(10)${C}TRUE${C}FILTER("con "&${B}&": "&${I}${C}${I}<>""))${C}"ninguna")`,
-    'B26': `=IFERROR(TEXTJOIN(CHAR(10)${C}TRUE${C}FILTER(${B}&" — "&${K}${C}${K}<>""))${C}"ninguno")`
+    'B16': `=IFERROR(TEXTJOIN(CHAR(10)${C}TRUE${C}FILTER(${B}&" — "&${E}&IF(${F}=""${C}""${C}" ("&${F}&")")${C}${E}<>""${C}${E}<>"Ninguna"))${C}"ninguna")`,
+    'B20': `=IFERROR(TEXTJOIN(CHAR(10)${C}TRUE${C}FILTER(${B}&" — "&${G}${C}${G}<>""))${C}"ninguna")`,
+    'B23': `=IFERROR(TEXTJOIN(CHAR(10)${C}TRUE${C}FILTER(${B}&": "&${H}${C}${H}<>""))${C}"ninguno")`
   };
   for (const celda in f) h.getRange(celda).setFormula(f[celda]);
 
@@ -131,9 +175,8 @@ function armarResumen() {
   h.getRange('A1').setFontSize(16).setFontWeight('bold');
   h.getRange('A2').setFontStyle('italic').setFontColor('#666666');
   h.getRange('A4:B4').setFontWeight('bold').setFontSize(14).setBackground('#F0E9DB');
-  ['A11', 'A15', 'A19', 'A22', 'A25'].forEach(c =>
-    h.getRange(c).setFontWeight('bold').setFontColor('#571E21'));
-  h.getRange('A15:B15').setBackground('#F8E0E0');
+  ['A11', 'A15', 'A19', 'A22'].forEach(c =>
+    h.getRange(c).setFontWeight('bold').setFontColor('#73302F'));
   h.getRange('B13').setFontSize(9).setFontStyle('italic').setFontColor('#888888');
   h.getRange('B17').setFontSize(9).setFontStyle('italic').setFontColor('#888888');
   h.getRange('B1:B30').setWrap(true).setVerticalAlignment('top');

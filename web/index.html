@@ -79,6 +79,7 @@ a{color:inherit}
    ============================================================ */
 .hero{
   min-height:100svh;background:var(--crema);color:var(--vino);
+  padding-block:clamp(4rem,10vh,7rem);
   display:grid;place-items:center;text-align:center;
   padding:clamp(3rem,8vw,6rem) var(--gutter);position:relative;overflow:hidden;
 }
@@ -118,8 +119,7 @@ a{color:inherit}
 /* ============================================================
    MONOGRAMA + FRASE
    ============================================================ */
-.frase{text-align:center}
-.frase__mono{width:min(230px,52vw);margin:0 auto}
+.frase__mono{width:min(170px,40vw);margin:clamp(2.4rem,6vh,3.6rem) auto 0}
 .frase__mono path,.frase__mono line{
   fill:none;stroke:var(--vino);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;
 }
@@ -209,6 +209,7 @@ a{color:inherit}
 .opciones--si-no label{min-width:140px;text-align:center;font-size:.88rem;padding:.8em 1.6em}
 
 .oculto{display:none}
+.trampa{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .req{color:var(--vino-claro);font-weight:400}
 .enviar{
   width:100%;margin-top:1rem;background:var(--vino);color:var(--crema);border:0;
@@ -308,37 +309,32 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.85;font-size:1.05rem}
     <p class="hero__fecha reveal">28 · 11 · 2026</p>
     <h1 class="hero__nombres reveal d1">Mica <span class="amp">&amp;</span> Juani</h1>
     <div class="hero__linea reveal d2"></div>
-    <p class="hero__claim reveal d2">Nos casamos, y queremos compartir ese momento con vos.</p>
+    <p class="hero__claim reveal d2">Nos casamos, y nos encantaría compartir este momento con vos.</p>
     <a class="hero__cta reveal d3" href="#confirmar">Confirmá tu asistencia</a>
+    <svg class="frase__mono" viewBox="0 0 300 200" role="img" aria-label="Monograma de Mica y Juani, dos corazones entrelazados">
+    <!-- corazón izquierdo -->
+    <path class="draw" style="--len:520"
+    d="M78 172 C40 146 22 122 22 100 C22 82 34 70 50 70 C63 70 73 78 78 88 C83 78 93 70 106 70 C122 70 134 82 134 100 C134 122 116 146 78 172 Z"/>
+    <!-- corazón derecho -->
+    <path class="draw" style="--len:520"
+    d="M222 172 C184 146 166 122 166 100 C166 82 178 70 194 70 C207 70 217 78 222 88 C227 78 237 70 250 70 C266 70 278 82 278 100 C278 122 260 146 222 172 Z"/>
+    <!-- nudo central + lazo -->
+    <path class="draw" style="--len:120" d="M134 108 C144 104 156 104 166 108"/>
+    <path class="draw" style="--len:190" d="M150 100 C150 84 138 78 142 68 C146 58 158 60 158 70 C158 80 148 86 150 100 Z"/>
+    <!-- colas -->
+    <path class="draw" style="--len:90" d="M22 104 C14 108 8 114 6 122"/>
+    <path class="draw" style="--len:90" d="M278 104 C286 108 292 114 294 122"/>
+    <!-- iniciales y fecha -->
+    <text class="ink" x="78" y="128" text-anchor="middle" font-family="Italianno, cursive" font-size="62">M</text>
+    <text class="ink" x="222" y="128" text-anchor="middle" font-family="Italianno, cursive" font-size="62">J</text>
+    <text class="ink" x="150" y="192" text-anchor="middle" font-family="Italianno, cursive" font-size="44">28/11</text>
+    </svg>
   </div>
   <div class="hero__scroll" aria-hidden="true">Seguí<span></span></div>
 </header>
 
 <main>
 
-<!-- ══════════════ MONOGRAMA + FRASE ══════════════ -->
-<section class="frase">
-  <div class="wrap">
-    <svg class="frase__mono" viewBox="0 0 300 200" role="img" aria-label="Monograma de Mica y Juani, dos corazones entrelazados">
-      <!-- corazón izquierdo -->
-      <path class="draw" style="--len:520"
-        d="M78 172 C40 146 22 122 22 100 C22 82 34 70 50 70 C63 70 73 78 78 88 C83 78 93 70 106 70 C122 70 134 82 134 100 C134 122 116 146 78 172 Z"/>
-      <!-- corazón derecho -->
-      <path class="draw" style="--len:520"
-        d="M222 172 C184 146 166 122 166 100 C166 82 178 70 194 70 C207 70 217 78 222 88 C227 78 237 70 250 70 C266 70 278 82 278 100 C278 122 260 146 222 172 Z"/>
-      <!-- nudo central + lazo -->
-      <path class="draw" style="--len:120" d="M134 108 C144 104 156 104 166 108"/>
-      <path class="draw" style="--len:190" d="M150 100 C150 84 138 78 142 68 C146 58 158 60 158 70 C158 80 148 86 150 100 Z"/>
-      <!-- colas -->
-      <path class="draw" style="--len:90" d="M22 104 C14 108 8 114 6 122"/>
-      <path class="draw" style="--len:90" d="M278 104 C286 108 292 114 294 122"/>
-      <!-- iniciales y fecha -->
-      <text class="ink" x="78" y="128" text-anchor="middle" font-family="Italianno, cursive" font-size="62">M</text>
-      <text class="ink" x="222" y="128" text-anchor="middle" font-family="Italianno, cursive" font-size="62">J</text>
-      <text class="ink" x="150" y="192" text-anchor="middle" font-family="Italianno, cursive" font-size="44">28/11</text>
-    </svg>
-  </div>
-</section>
 
 <!-- ══════════════ DATOS ══════════════ -->
 <section class="datos" id="datos">
@@ -384,6 +380,14 @@ footer .f2{margin-top:.9rem;letter-spacing:.2em;opacity:.85;font-size:1.05rem}
       </div>
 
       <form id="form" novalidate>
+        <!-- Trampa para bots: queda fuera de pantalla y sin tabulacion, asi que
+             una persona no la ve ni la puede completar. Los bots llenan todo lo
+             que encuentran, y si esto viene con algo el envio se descarta. -->
+        <div class="trampa" aria-hidden="true">
+          <label for="sitio-web">No completar este campo</label>
+          <input type="text" id="sitio-web" name="sitio-web" tabindex="-1" autocomplete="off">
+        </div>
+
         <div class="campo">
           <label for="nombre">Nombre y apellido</label>
           <input type="text" id="nombre" name="nombre" autocomplete="name" placeholder="Como te conocemos" required>
@@ -556,7 +560,7 @@ if(!ENDPOINT){
   },{threshold:.18,rootMargin:'0px 0px -8% 0px'});
   document.querySelectorAll('.reveal,.frase__mono').forEach(el=>io.observe(el));
   // el hero entra solo al cargar
-  requestAnimationFrame(()=>document.querySelectorAll('.hero .reveal').forEach(el=>el.classList.add('in')));
+  requestAnimationFrame(()=>document.querySelectorAll('.hero .reveal,.hero .frase__mono').forEach(el=>el.classList.add('in')));
 })();
 
 /* ---------- agendar: al calendario que corresponda en cada dispositivo ----------
@@ -645,7 +649,8 @@ form.addEventListener('submit',async e=>{
     dieta:solo(dietas.filter(c=>c.checked).map(c=>c.value).join(', ')),
     detalle:solo(val('detalle')),
     cancion:solo(val('cancion')),
-    mensaje:val('mensaje')
+    mensaje:val('mensaje'),
+    trampa:val('sitio-web')
   };
 
   btn.disabled=true; btn.textContent='Enviando, no cierres la página…';

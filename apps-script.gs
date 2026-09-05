@@ -201,3 +201,78 @@ function armarResumen() {
   console.log('Resumen armado. Locale: ' + loc + ' | separador usado: "' + C + '"');
   console.log('Ejemplo de formula generada: ' + f['B7']);
 }
+
+/**
+ * Arma en la columna S un link por invitado que abre WhatsApp con el mensaje
+ * ya escrito. Correr desde el editor, eligiendo "armarLinksWhatsApp".
+ *
+ * Por que una funcion y no una formula: los telefonos vienen en cinco formatos
+ * distintos (10 digitos sin pais, +54, +34, +1, +598...). Normalizarlos en una
+ * formula da algo ilegible e imposible de corregir despues.
+ *
+ * LA REGLA:
+ *   - si el numero empieza con "+", ya trae el pais: solo se le sacan los
+ *     simbolos y espacios.
+ *   - si no, es argentino de 10 digitos (area + numero) y se le antepone 549.
+ *     Sirve para cualquier area del pais, porque area+numero siempre suma 10.
+ */
+function armarLinksWhatsApp() {
+  const HOJA_INV = 'Copia de Invitados (definitiva)';
+  const FILA_1   = 5;    // primera fila con un invitado
+  const COL_NOMBRE = 2;  // B  nombre y apellido
+  const COL_TEL    = 8;  // H  numero de WA
+  const COL_CORTO  = 17; // Q  como lo saludamos
+  const COL_LINK   = 19; // S  aca se escribe el link
+
+  const hoja = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(HOJA_INV);
+  if (!hoja) throw new Error('No encuentro la hoja "' + HOJA_INV + '"');
+
+  const ultima = hoja.getLastRow();
+  const datos = hoja.getRange(FILA_1, 1, ultima - FILA_1 + 1, COL_CORTO).getValues();
+
+  const salida = [];
+  const sinTelefono = [];
+  const sospechosos = [];
+  let hechos = 0;
+
+  datos.forEach((fila, i) => {
+    const nombre = String(fila[COL_NOMBRE - 1] || '').trim();
+    const corto  = String(fila[COL_CORTO  - 1] || '').trim() || nombre.split(' ')[0];
+    const telCru = String(fila[COL_TEL    - 1] || '').trim();
+
+    if (!nombre) { salida.push(['']); return; }
+    if (!telCru) { sinTelefono.push(nombre); salida.push(['falta el teléfono']); return; }
+
+    const soloDigitos = telCru.replace(/\D/g, '');
+    const tel = telCru.charAt(0) === '+' ? soloDigitos : '549' + soloDigitos;
+
+    // Un numero internacional completo va de 10 a 15 digitos: España son 11
+    // (34 + nueve), Argentina 13 (549 + diez), Dinamarca 10. Lo que si avisa
+    // de un problema real es un argentino que no traiga exactamente 10 digitos,
+    // porque la regla del 549 asume esa longitud.
+    const esArgentinoSinPais = telCru.charAt(0) !== '+';
+    if ((esArgentinoSinPais && soloDigitos.length !== 10) || tel.length < 10 || tel.length > 15) {
+      sospechosos.push(nombre + ': "' + telCru + '" quedo como ' + tel + ' (' + tel.length + ' digitos)');
+    }
+
+    const msg = corto + ',\n\n' +
+      'Nos casamos y nos encantaría compartir este momento con vos ❤️\n\n' +
+      'En este link vas a encontrar toda la info del evento y la confirmación ' +
+      'que te pedimos hagas mediante el form (uno por persona).\n\n' +
+      'https://bodamicayjuani.com\n\n' +
+      'Te esperamos!!\n🕺🏻💃🏼💍❤️';
+
+    const url = 'https://wa.me/' + tel + '?text=' + encodeURIComponent(msg);
+    salida.push(['=HYPERLINK("' + url + '";"Mandar a ' + corto.replace(/"/g, "'") + '")']);
+    hechos++;
+  });
+
+  hoja.getRange(FILA_1, COL_LINK, salida.length, 1).setFormulas(salida);
+  hoja.setColumnWidth(COL_LINK, 190);
+  hoja.getRange(FILA_1 - 1, COL_LINK).setValue('Mandar por WhatsApp').setFontWeight('bold');
+
+  console.log('Links generados: ' + hechos);
+  console.log('Sin teléfono (' + sinTelefono.length + '): ' + (sinTelefono.join(', ') || 'ninguno'));
+  console.log('Para revisar a mano (' + sospechosos.length + '):');
+  sospechosos.forEach(s => console.log('   ' + s));
+}

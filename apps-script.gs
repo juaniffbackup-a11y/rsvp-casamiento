@@ -123,6 +123,10 @@ function reiniciarRespuestas() {
   nueva.setFrozenRows(1);
   nueva.setColumnWidth(1, 150);
   nueva.setColumnWidth(2, 180);
+  // El contacto va como TEXTO. Si queda como numero, Sheets se come el "+" de
+  // los telefonos europeos y el cero inicial de los argentinos (01169... pasa
+  // a 1169...). Verificado el 05/09/2026: +34600111222 se guardo 34600111222.
+  nueva.getRange('C:C').setNumberFormat('@');
   console.log('Hoja "' + HOJA + '" reiniciada con ' + COLUMNAS.length + ' columnas: ' + COLUMNAS.join(', '));
 }
 
